@@ -1,5 +1,5 @@
 <template>
-    <div class="w-50">
+    <div class="w-75 mx-auto mt-5">
         <ProgressBar/>
     </div>
 </template>

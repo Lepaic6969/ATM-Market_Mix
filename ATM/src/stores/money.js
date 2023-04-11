@@ -11,43 +11,92 @@ export const useMoneyStore = defineStore('money', {
     
     actions: {
         //Para inicializar los porcentajes con los valores que traiga el Backend.
-        setPercentages(){
+        async setPercentages(){
+            try{
+            //1. Debo establecer la capacidad de los contenedores de billetes.
+            //2. Debo establecer la cantidad de billetes que hay actualmente en cada contenedor.
+            //3. Debo hacer una regla de 3 para saber que porcentaje es el que está lleno en cada contenedor.
+            //4. Debo setear mi state con esos porcentajes.
+
+            }catch(err){
+                console.log(err);
+            }
 
         },
         //Acciones para la carga de billetes.
-        increment100(value){
-            //TODO: Aquí debe ir la validación para que no se desborde mi contenedor.
-            this.percentage100+=value;
+        async increment100(value){
+            try{
+                //TODO: Aquí debe ir la validación para que no se desborde mi contenedor.
+                this.percentage100+=value;
+            }catch(err){
+                console.log(err)
+            }
+            
         },
-        increment50(value){
-            //TODO: Aquí debe ir la validación para que no se desborde mi contenedor.
-            this.percentage50+=value;
+        async increment50(value){
+            try{
+                //TODO: Aquí debe ir la validación para que no se desborde mi contenedor.
+                this.percentage50+=value;
+            }catch(err){
+                console.log(err)
+            }
+           
         },
-        increment20(value){
-            //TODO: Aquí debe ir la validación para que no se desborde mi contenedor.
-            this.percentage20+=value;
+        async increment20(value){
+            try{
+                //TODO: Aquí debe ir la validación para que no se desborde mi contenedor.
+                this.percentage20+=value;
+            }catch(err){
+                console.log(err);
+            }
+          
         },
-        increment10(value){
-            //TODO: Aquí debe ir la validación para que no se desborde mi contenedor.
-            this.percentage10+=value;
+        async increment10(value){
+            try{
+                //TODO: Aquí debe ir la validación para que no se desborde mi contenedor.
+                this.percentage10+=value;
+            }catch(err){
+                console.log(err);
+            }
+           
         },
 
         //Acciones para el retiro de Efectivo.
-        decrement100(value){
-            //TODO: Aquí debe ir la validación para que mi contenedor no tenga valores negativos de billetes.
-            this.percentage100-=value;
+        async decrement100(value){
+            try{
+                //TODO: Aquí debe ir la validación para que mi contenedor no tenga valores negativos de billetes.
+                this.percentage100-=value;
+            }catch(err){
+                console.log(err);
+            }
+            
         },
-        decrement50(value){
-            //TODO: Aquí debe ir la validación para que mi contenedor no tenga valores negativos de billetes.
-            this.percentage50-=value;
+        async decrement50(value){
+            try{
+                //TODO: Aquí debe ir la validación para que mi contenedor no tenga valores negativos de billetes.
+                this.percentage50-=value;
+            }catch(err){
+                console.log(err);
+            }
+           
         },
-        decrement20(value){
-           //TODO: Aquí debe ir la validación para que mi contenedor no tenga valores negativos de billetes.
-            this.percentage20-=value;
+        async decrement20(value){
+            try{
+                //TODO: Aquí debe ir la validación para que mi contenedor no tenga valores negativos de billetes.
+                this.percentage20-=value;
+            }catch(err){
+                console.log(err);
+            }
+           
         },
-        decrement10(value){
-            //TODO: Aquí debe ir la validación para que mi contenedor no tenga valores negativos de billetes.
-            this.percentage10-=value;
+        async decrement10(value){
+            try{
+                //TODO: Aquí debe ir la validación para que mi contenedor no tenga valores negativos de billetes.
+                this.percentage10-=value;
+            }catch(err){
+                console.log(err);
+            }
+            
         },
       
     },

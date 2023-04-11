@@ -1,6 +1,30 @@
 <template>
+    
     <div>
-        <!-- Diagramas Circulares -->
+      <!-- Este es para habilitar los diferentes diagramas -->
+      <div class="mb-4">
+        <n-space>
+          <n-button icon-placement="left" @click="setDiagramType('circle')" >
+            <template #icon>
+              <n-icon>
+                <MdPie />
+              </n-icon>
+            </template>
+            Diagrama Circular
+          </n-button>
+          
+          <n-button icon-placement="left" @click="setDiagramType('bars')">
+            <template #icon>
+              <n-icon>
+                <MdStats/>
+              </n-icon>
+            </template>
+            Diagrama de Barras
+          </n-button>
+        </n-space>
+      </div>
+      <!-- Diagramas Circulares -->
+      <div v-if="diagramType==='circle'">
         <n-progress
         style="margin: 0 8px 12px 0"
         type="circle"
@@ -13,9 +37,9 @@
         style="margin: 0 8px 12px 0"
         type="circle"
         :percentage="percentage50"
-        color="rgb(167,130,179)"
-        rail-color="changeColor(rgb(167,130,179), { alpha: 0.2 })"
-        indicator-text-color="rgb(167,130,179)"
+        color="rgba(106, 13, 173,0.9)"
+        rail-color="changeColor(rgba(106, 13, 173,0.9)), { alpha: 0.2 })"
+        indicator-text-color="rgba(106, 13, 173,0.9)"
         />
         <n-progress
         style="margin: 0 8px 12px 0"
@@ -34,7 +58,9 @@
         indicator-text-color="rgb(210,42,35)"
         />
 
-        <!-- Barras de progreso -->
+      </div>
+      <!-- Barras de progreso -->
+      <div v-if="diagramType==='bars'">
         <n-progress
         type="line"
         indicator-placement="inside"
@@ -46,8 +72,8 @@
         <n-progress
         type="line"
         indicator-placement="inside"
-        color="rgb(167,130,179)"
-        rail-color="changeColor(rgb(167,130,179), { alpha: 0.2 })"
+        color="rgba(106, 13, 173,0.9)"
+        rail-color="changeColor(rgba(106, 13, 173,0.9), { alpha: 0.2 })"
         :percentage="percentage50"
         class="mb-2"
         />
@@ -68,16 +94,36 @@
         :percentage="percentage10"
         class="mb-2"
         />
+      </div>
     </div>
 </template>
   
   <script setup>
-  import { changeColor } from "seemly";
   import {storeToRefs} from 'pinia';
   import {useMoneyStore} from '../stores/money.js';
+  import {ref} from 'vue';
+  import { MdStats,MdPie } from "@vicons/ionicons4";
 
   const moneyStore=useMoneyStore();
   const {percentage10,percentage20,percentage50,percentage100} =storeToRefs(moneyStore);
 
+  //Variable que se encarga de habilitar las barras o los diagramas circulares.
+  const diagramType=ref("bars");
+  //Función para habilitar el tipo de diagramas
+  const setDiagramType=(type)=>{
+    diagramType.value=type;
+  }
+
   </script>
+
+<style scoped>
+.n-button:active,
+.n-button:focus,
+.n-button:hover {
+  border-color: #131240 !important;
+  box-shadow: 0 0 3px 1px #131240 !important;
+  color: #131240;
+}
+
+</style>
  
