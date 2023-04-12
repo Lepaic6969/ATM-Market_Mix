@@ -41,31 +41,31 @@
                     aria-modal="true"
                     >
                     <form class="d-flex">
-                        <div class="w-100 px-3">
+                        <div class="w-100 px-3 border-container me-2">
                             <div class="mb-3">
                                 <label for="diez" class="form-label fw-bold">Billetes de $10.000</label>
-                                <input type="number" class="form-control " id="diez" placeholder="Cantidad de billetes">
+                                <input type="number" class="form-control " id="diez" placeholder="Cantidad">
                             </div>
                             <button type="submit" class="btn btn-pink w-100">Agregar</button>
                         </div>
-                        <div class="w-100 px-3">
+                        <div class="w-100 px-3 border-container me-2">
                             <div class="mb-3">
                                 <label for="diez" class="form-label fw-bold">Billetes de $20.000</label>
-                                <input type="number" class="form-control " id="diez" placeholder="Cantidad de billetes">
+                                <input type="number" class="form-control " id="diez" placeholder="Cantidad">
                             </div>
                             <button type="submit" class="btn btn-pink w-100">Agregar</button>
                         </div>
-                        <div class="w-100 px-3">
+                        <div class="w-100 px-3 border-container me-2">
                             <div class="mb-3">
                                 <label for="diez" class="form-label fw-bold">Billetes de $50.000</label>
-                                <input type="number" class="form-control " id="diez" placeholder="Cantidad de billetes">
+                                <input type="number" class="form-control " id="diez" placeholder="Cantidad">
                             </div>
                             <button type="submit" class="btn btn-pink w-100">Agregar</button>
                         </div>
-                        <div class="w-100 px-3">
+                        <div class="w-100 px-3 border-container">
                             <div class="mb-3">
                                 <label for="diez" class="form-label fw-bold">Billetes de $100.000</label>
-                                <input type="number" class="form-control " id="diez" placeholder="Cantidad de billetes">
+                                <input type="number" class="form-control " id="diez" placeholder="Cantidad">
                             </div>
                             <button type="submit" class="btn btn-pink w-100">Agregar</button>
                         </div>
@@ -153,5 +153,9 @@
   .color-text{
     color:rgb(33,0,73);
   }
-
+  .border-container{
+    border:3px solid #78778c;
+    border-radius: 20px;
+    padding:15px 20px;
+  }
   </style>
