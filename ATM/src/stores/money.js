@@ -2,10 +2,15 @@ import { defineStore } from 'pinia';
 
 export const useMoneyStore = defineStore('money', {
     state: () => ({ 
+        //Variables para los porcentajes
         percentage100:70,
         percentage50:50,
         percentage20:20,
-        percentage10:10
+        percentage10:10,
+        //Variable para habilitar o desabilitar el modal
+        showModal :false,
+        //Este es el arreglo que habilita los contenedores para ingresar el dinero.
+        container:[true,true,true,true],
 
     }),
     
@@ -98,6 +103,22 @@ export const useMoneyStore = defineStore('money', {
             }
             
         },
+        //Acciones para habilitar y desabilitar el modal
+        
+        handleClose() {
+            this.showModal= false;
+        },
+        //Cuando quieren abrir todos los cajones de dinero...
+        handleOpen(){
+            this.container=[true,true,true,true];
+            this.showModal=true;
+        },
+        //Cuando sólo quieren abrir un cajón en específico...
+        handleOpenCustom(index){
+            this.container=[false,false,false,false];
+            this.container[index]=true;
+            this.showModal=true;
+        }
       
     },
     getters: {

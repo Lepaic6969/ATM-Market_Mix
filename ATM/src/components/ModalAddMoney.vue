@@ -6,7 +6,7 @@
             <n-notification-provider>
             <n-dialog-provider>
                 <n-space class="mt-3">
-                <n-button icon-placement="left" @click="showModal = true">
+                <n-button icon-placement="left" @click="handleOpen">
                     <template #icon>
                     <n-icon>
                         <MdCash/>
@@ -28,12 +28,12 @@
                 negative-text="Cancel"
                 
                 /> -->
-                <n-modal v-model:show="showModal" class="mx-3" >
+                <n-modal v-model:show="showModal" class="mx-auto" >
                    
                     <n-card
                     class="color-text"
                     closable @close="handleClose"
-                    style="width:auto;height: 350px;"
+                    style="width:auto; max-width:95%;height: 350px;"
                     title="VivaBanco"
                     :bordered="false"
                     size="huge"
@@ -42,40 +42,37 @@
                     >
                  
                     <form class="d-flex mb-5">
-                        <div class="w-100 px-3 border-container bg-box me-3">
+                        <div class="w-100 px-3 border-container bg-box me-3" v-if="container[0]">
                             <div class="mb-3">
                                 <label for="diez" class="form-label fw-bold ">Billetes de $100.000</label>
-                                <input type="number" class="form-control " id="diez" placeholder="Cantidad de billetes">
+                                <input type="number" class="form-control " id="diez" placeholder="Número de billetes">
                             </div>
                             <button type="submit" class="btn btn-pink w-100 fs-5">Agregar</button>
                         </div>
-                        <div class="w-100 px-3 border-container me-3 bg-box">
+                        <div class="w-100 px-3 border-container me-3 bg-box" v-if="container[1]">
                             <div class="mb-3">
                                 <label for="diez" class="form-label fw-bold">Billetes de $50.000</label>
-                                <input type="number" class="form-control " id="diez" placeholder="Cantidad de billetes">
+                                <input type="number" class="form-control " id="diez" placeholder="Número de billetes">
                             </div>
                             <button type="submit" class="btn btn-pink w-100 fs-5">Agregar</button>
                         </div>
-                        <div class="w-100 px-3 border-container me-3 bg-box">
+                        <div class="w-100 px-3 border-container me-3 bg-box" v-if="container[2]">
                             <div class="mb-3">
                                 <label for="diez" class="form-label fw-bold">Billetes de $20.000</label>
-                                <input type="number" class="form-control " id="diez" placeholder="Cantidad de billetes">
+                                <input type="number" class="form-control " id="diez" placeholder="Número de billetes">
                             </div>
                             <button type="submit" class="btn btn-pink w-100 fs-5">Agregar</button>
                         </div>
-                        <div class="w-100 px-3 border-container me-3 bg-box">
+                        <div class="w-100 px-3 border-container me-3 bg-box" v-if="container[3]">
                             <div class="mb-3">
                                 <label for="diez" class="form-label fw-bold">Billetes de $10.000</label>
-                                <input type="number" class="form-control " id="diez" placeholder="Cantidad de billetes">
+                                <input type="number" class="form-control " id="diez" placeholder="Número de billetes">
                             </div>
                             <button type="submit" class="btn btn-pink w-100 fs-5">Agregar</button>
                         </div>
 
                        
                     </form>
-                    <!-- <template #footer>
-                        Footer
-                    </template> -->
                     </n-card>
                 </n-modal>
             </n-dialog-provider>
@@ -87,42 +84,16 @@
     
   </template>
   
-  <!-- <script>
-  import { defineComponent, ref } from "vue";
-  import { useMessage } from "naive-ui";
-  import {MdCash} from '@vicons/ionicons4';
-  
-  export default defineComponent({
-    setup() {
-    
-      const message = useMessage();
-      const showModalRef = ref(false);
-      
-      return {
-        showModal: showModalRef,
-        onPositiveClick() {
-          message.success("Submit");
-          showModalRef.value = false;
-        },
-        onNegativeClick() {
-          message.success("Cancel");
-          showModalRef.value = false;
-        }
-      };
-    }
-  });
-  </script> -->
+
   <script setup>
-  import { ref } from "vue";
   import {MdCash,MdClose} from '@vicons/ionicons4';
+  import {useMoneyStore} from '../stores/money.js';
+  import { storeToRefs } from "pinia";
 
-    
-      
-    const showModal = ref(false);
-
-    const handleClose=() =>{
-        showModal.value = false;
-    }
+  const moneyStore=useMoneyStore();
+  const {showModal,container}=storeToRefs(moneyStore);
+  const {handleClose,handleOpen}=moneyStore;
+  
     
     
     

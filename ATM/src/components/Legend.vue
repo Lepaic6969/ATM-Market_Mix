@@ -3,25 +3,25 @@
  
         
         <div class="row mt-2">
-          <div class="col-md-3 ">
+          <div class="col-md-2 ">
             <div class="legend-item d-flex align-items-center">
               <div class="legend-text bg-color-100 ">10</div>
               <p class="mt-3 ms-1">$100.000</p>
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-2">
             <div class="legend-item d-flex align-items-center">
               <div class="legend-text bg-color-50 ">50</div>
               <p class="mt-3 ms-1">$50.000</p>
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-2">
             <div class="legend-item d-flex align-items-center">
               <div class="legend-text bg-color-20">20</div>
               <p class="mt-3 ms-1">$20.000</p>
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-2">
             <div class="legend-item d-flex align-items-center">
               <div class="legend-text bg-color-10">10</div>
               <p class="mt-3 ms-1">$10.000</p>
