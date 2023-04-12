@@ -8,6 +8,8 @@ import router from './router'
 //Importamos Bootstrap
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.js'
+//Importamos algunos estilos que deben ir generales en la App para que funcionen.
+import './assets/styles.css';
 
 const app = createApp(App)
 

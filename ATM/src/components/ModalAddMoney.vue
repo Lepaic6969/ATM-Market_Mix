@@ -1,11 +1,11 @@
 <template>
 
-    <div>
+    <div >
         <n-loading-bar-provider>
         <n-message-provider>
             <n-notification-provider>
             <n-dialog-provider>
-                <n-space class="mt-5">
+                <n-space class="mt-3">
                 <n-button icon-placement="left" @click="showModal = true">
                     <template #icon>
                     <n-icon>
@@ -28,46 +28,47 @@
                 negative-text="Cancel"
                 
                 /> -->
-                <n-modal v-model:show="showModal"  >
+                <n-modal v-model:show="showModal" class="mx-3" >
                    
                     <n-card
                     class="color-text"
                     closable @close="handleClose"
-                    style="width: 80%"
-                    title=""
+                    style="width:auto;height: 350px;"
+                    title="VivaBanco"
                     :bordered="false"
                     size="huge"
                     role="dialog"
                     aria-modal="true"
                     >
-                    <form class="d-flex">
-                        <div class="w-100 px-3 border-container me-2">
+                 
+                    <form class="d-flex mb-5">
+                        <div class="w-100 px-3 border-container bg-box me-3">
                             <div class="mb-3">
-                                <label for="diez" class="form-label fw-bold">Billetes de $10.000</label>
-                                <input type="number" class="form-control " id="diez" placeholder="Cantidad">
+                                <label for="diez" class="form-label fw-bold ">Billetes de $100.000</label>
+                                <input type="number" class="form-control " id="diez" placeholder="Cantidad de billetes">
                             </div>
-                            <button type="submit" class="btn btn-pink w-100">Agregar</button>
+                            <button type="submit" class="btn btn-pink w-100 fs-5">Agregar</button>
                         </div>
-                        <div class="w-100 px-3 border-container me-2">
-                            <div class="mb-3">
-                                <label for="diez" class="form-label fw-bold">Billetes de $20.000</label>
-                                <input type="number" class="form-control " id="diez" placeholder="Cantidad">
-                            </div>
-                            <button type="submit" class="btn btn-pink w-100">Agregar</button>
-                        </div>
-                        <div class="w-100 px-3 border-container me-2">
+                        <div class="w-100 px-3 border-container me-3 bg-box">
                             <div class="mb-3">
                                 <label for="diez" class="form-label fw-bold">Billetes de $50.000</label>
-                                <input type="number" class="form-control " id="diez" placeholder="Cantidad">
+                                <input type="number" class="form-control " id="diez" placeholder="Cantidad de billetes">
                             </div>
-                            <button type="submit" class="btn btn-pink w-100">Agregar</button>
+                            <button type="submit" class="btn btn-pink w-100 fs-5">Agregar</button>
                         </div>
-                        <div class="w-100 px-3 border-container">
+                        <div class="w-100 px-3 border-container me-3 bg-box">
                             <div class="mb-3">
-                                <label for="diez" class="form-label fw-bold">Billetes de $100.000</label>
-                                <input type="number" class="form-control " id="diez" placeholder="Cantidad">
+                                <label for="diez" class="form-label fw-bold">Billetes de $20.000</label>
+                                <input type="number" class="form-control " id="diez" placeholder="Cantidad de billetes">
                             </div>
-                            <button type="submit" class="btn btn-pink w-100">Agregar</button>
+                            <button type="submit" class="btn btn-pink w-100 fs-5">Agregar</button>
+                        </div>
+                        <div class="w-100 px-3 border-container me-3 bg-box">
+                            <div class="mb-3">
+                                <label for="diez" class="form-label fw-bold">Billetes de $10.000</label>
+                                <input type="number" class="form-control " id="diez" placeholder="Cantidad de billetes">
+                            </div>
+                            <button type="submit" class="btn btn-pink w-100 fs-5">Agregar</button>
                         </div>
 
                        
@@ -128,7 +129,11 @@
  
   </script>
 
-  <style scoped>
+  <style scoped >
+  .n-button{
+    font-size: 20px;
+  }
+ 
   .n-button:active,
   .n-button:focus,
   .n-button:hover {
@@ -138,24 +143,42 @@
   }
   
   .n-modal{
-    background-color: #f2f2f2;
+    background-color: #131240;
     border-radius: 20px;
+  }
+ 
+  .bg-box{
+    background-color: #f2f2f2;
+    font-size: 20px;
   }
   input{
     background-color: #f2f2f2;
   }
   .btn-pink{
     background-color: #f23078;
-    color:white;
-    border-radius: 20px;
+    color:#f2f2f2;
+    border: 2px solid #f23078;
+    border-radius: 10px;
     
   }
+  .btn-pink:hover {
+  background-color: transparent;
+  color: #f23078;
+  font-weight:500;
+}
   .color-text{
     color:rgb(33,0,73);
   }
+  
   .border-container{
     border:3px solid #78778c;
     border-radius: 20px;
     padding:15px 20px;
+  }
+  h5{
+    color:#f2f2f2;
+    text-align: center;
+    margin-bottom: 40px;
+    font-weight: 400;
   }
   </style>

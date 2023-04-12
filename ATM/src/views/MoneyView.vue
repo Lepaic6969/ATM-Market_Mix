@@ -1,7 +1,8 @@
 <template>
-  <div class="w-100 bg-total py-5">
-    <div class="w-75 mx-auto  bg-content p-3">
+  <div class="w-100 bg-total d-flex flex-column justify-content-center ">
+    <div class="w-75 mx-auto  bg-content p-3 ">
         <ProgressBar class="h-progress-bar"/>
+        <Legend/>
         <!-- Botón para agregar Efectivo -->
         <!-- <n-space class="mt-5">
           <n-button icon-placement="left" >
@@ -14,11 +15,12 @@
           </n-button>
         </n-space> -->
         <!--Modal para agregar dinero -->
-        <n-loading-bar-provider>
+        
+        <n-loading-bar-provider >
         <n-message-provider>
         <n-notification-provider>
           <n-dialog-provider>
-            <ModalAddMoney/>
+            <ModalAddMoney />
           </n-dialog-provider>
         </n-notification-provider>
       </n-message-provider>
@@ -32,6 +34,7 @@
 import ProgressBar from '../components/ProgressBar.vue';
 import {MdCash} from '@vicons/ionicons4';
 import ModalAddMoney from '../components/ModalAddMoney.vue';
+import Legend from '../components/Legend.vue';
 
 </script>
 
@@ -40,7 +43,11 @@ import ModalAddMoney from '../components/ModalAddMoney.vue';
   background-color: #f2f2f2;
   border-radius: 20px;
   width: 90%;
+  border:3px solid #78778c;
+  
+
 }
+
  .bg-total{
   background-color: #131240;
   height: 100vh;
