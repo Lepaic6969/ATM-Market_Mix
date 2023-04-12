@@ -24,9 +24,9 @@
         </n-space>
       </div>
       <!-- Diagramas Circulares -->
-      <div v-if="diagramType==='circle'">
+      <div v-if="diagramType==='circle'" class="mt-5">
         <n-progress
-        style="margin: 0 8px 12px 0"
+        style="margin: 0 10px 12px 0"
         type="circle"
         :percentage="percentage100"
         color="rgb(78,146,137)"
@@ -34,7 +34,7 @@
         indicator-text-color="rgb(78,146,137)"
         />
         <n-progress
-        style="margin: 0 8px 12px 0"
+        style="margin: 0 10px 12px 0"
         type="circle"
         :percentage="percentage50"
         color="rgba(106, 13, 173,0.9)"
@@ -42,7 +42,7 @@
         indicator-text-color="rgba(106, 13, 173,0.9)"
         />
         <n-progress
-        style="margin: 0 8px 12px 0"
+        style="margin: 0 10px 12px 0"
         type="circle"
         :percentage="percentage20"
         color="rgb(251,130,72)"
@@ -50,7 +50,7 @@
         indicator-text-color="rgb(251,130,72)"
         />
         <n-progress
-        style="margin: 0 8px 12px 0"
+        style="margin: 0 10px 12px 0"
         type="circle"
         :percentage="percentage10"
         color="rgb(210,42,35)"
@@ -60,7 +60,7 @@
 
       </div>
       <!-- Barras de progreso -->
-      <div v-if="diagramType==='bars'">
+      <div v-if="diagramType==='bars'" class="mt-5">
         <n-progress
         type="line"
         indicator-placement="inside"

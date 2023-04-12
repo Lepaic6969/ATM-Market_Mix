@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 
 export const useMoneyStore = defineStore('money', {
     state: () => ({ 
-        percentage100:100,
+        percentage100:70,
         percentage50:50,
         percentage20:20,
         percentage10:10
