@@ -46,7 +46,7 @@
                           <div class="w-100 px-3 border-container bg-box " >
                             <div class="mb-3">
                                 <label for="diez" class="form-label fw-bold ">Billetes de $100.000</label>
-                                <input type="number" class="form-control " id="diez" placeholder="Número de billetes">
+                                <input type="number" class="form-control " id="diez" placeholder="Número de billetes" v-model="oneHundred">
                             </div>
                             <button type="submit" class="btn btn-pink w-100 fs-5">Agregar</button>
                         </div>
@@ -55,7 +55,7 @@
                          <div class="w-100 px-3 border-container  bg-box" >
                             <div class="mb-3">
                                 <label for="diez" class="form-label fw-bold">Billetes de $50.000</label>
-                                <input type="number" class="form-control " id="diez" placeholder="Número de billetes">
+                                <input type="number" class="form-control " id="diez" placeholder="Número de billetes" v-model="fifty" >
                             </div>
                             <button type="submit" class="btn btn-pink w-100 fs-5">Agregar</button>
                         </div>
@@ -64,7 +64,7 @@
                         <div class="w-100 px-3 border-container  bg-box" >
                             <div class="mb-3">
                                 <label for="diez" class="form-label fw-bold">Billetes de $20.000</label>
-                                <input type="number" class="form-control " id="diez" placeholder="Número de billetes">
+                                <input type="number" class="form-control " id="diez" placeholder="Número de billetes" v-model="twenty">
                             </div>
                             <button type="submit" class="btn btn-pink w-100 fs-5">Agregar</button>
                         </div>
@@ -73,44 +73,12 @@
                            <div class="w-100 px-3 border-container  bg-box" >
                             <div class="mb-3">
                                 <label for="diez" class="form-label fw-bold">Billetes de $10.000</label>
-                                <input type="number" class="form-control " id="diez" placeholder="Número de billetes">
+                                <input type="number" class="form-control " id="diez" placeholder="Número de billetes" v-model="ten">
                             </div>
                             <button type="submit" class="btn btn-pink w-100 fs-5">Agregar</button>
                         </div>
                       </form>
                      </div>
-                    <!-- <form class="d-flex mb-5">
-                        <div class="w-100 px-3 border-container bg-box me-3" v-if="container[0]">
-                            <div class="mb-3">
-                                <label for="diez" class="form-label fw-bold ">Billetes de $100.000</label>
-                                <input type="number" class="form-control " id="diez" placeholder="Número de billetes">
-                            </div>
-                            <button type="submit" class="btn btn-pink w-100 fs-5">Agregar</button>
-                        </div>
-                        <div class="w-100 px-3 border-container me-3 bg-box" v-if="container[1]">
-                            <div class="mb-3">
-                                <label for="diez" class="form-label fw-bold">Billetes de $50.000</label>
-                                <input type="number" class="form-control " id="diez" placeholder="Número de billetes">
-                            </div>
-                            <button type="submit" class="btn btn-pink w-100 fs-5">Agregar</button>
-                        </div>
-                        <div class="w-100 px-3 border-container me-3 bg-box" v-if="container[2]">
-                            <div class="mb-3">
-                                <label for="diez" class="form-label fw-bold">Billetes de $20.000</label>
-                                <input type="number" class="form-control " id="diez" placeholder="Número de billetes">
-                            </div>
-                            <button type="submit" class="btn btn-pink w-100 fs-5">Agregar</button>
-                        </div>
-                        <div class="w-100 px-3 border-container me-3 bg-box" v-if="container[3]">
-                            <div class="mb-3">
-                                <label for="diez" class="form-label fw-bold">Billetes de $10.000</label>
-                                <input type="number" class="form-control " id="diez" placeholder="Número de billetes">
-                            </div>
-                            <button type="submit" class="btn btn-pink w-100 fs-5">Agregar</button>
-                        </div>
-
-                       
-                    </form> -->
                     </n-card>
                 </n-modal>
             </n-dialog-provider>
@@ -127,23 +95,33 @@
   import {MdCash,MdClose} from '@vicons/ionicons4';
   import {useMoneyStore} from '../stores/money.js';
   import { storeToRefs } from "pinia";
+  import {ref} from 'vue';
 
   const moneyStore=useMoneyStore();
   const {showModal,container}=storeToRefs(moneyStore);
   const {handleClose,handleOpen}=moneyStore;
   
-  //Programación para procesar los formularios.
+  //**********Programación para procesar los formularios******************
+
+  //Variables reactivas de los formularios.
+  const oneHundred=ref('');
+  const fifty=ref('');
+  const twenty=ref('');
+  const ten=ref('');
+  const validateData=()=>{
+    //Aquí van a ir todas las validaciones.
+  }
   const handleForm100=()=>{
-    alert("Estamos añadiendo los billetes de 100 mil");
+    alert("Estamos añadiendo los billetes de 100 mil -> " + oneHundred.value);
   }
   const handleForm50=()=>{
-    alert("Estamos añadiendo los billetes de 50 mil");
+    alert("Estamos añadiendo los billetes de 50 mil -> " +fifty.value);
   }
   const handleForm20=()=>{
-    alert("Estamos añadiendo los billetes de 20 mil");
+    alert("Estamos añadiendo los billetes de 20 mil -> "+ twenty.value);
   }
    const handleForm10=()=>{
-    alert("Estamos añadiendo los billetes de 10 mil");
+    alert("Estamos añadiendo los billetes de 10 mil -> " + ten.value);
   }
     
     
