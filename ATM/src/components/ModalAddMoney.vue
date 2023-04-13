@@ -99,7 +99,7 @@
 
   const moneyStore=useMoneyStore();
   const {showModal,container}=storeToRefs(moneyStore);
-  const {handleClose,handleOpen}=moneyStore;
+  const {handleClose,handleOpen,increment100,increment50,increment20,increment10}=moneyStore;
   
   //**********Programación para procesar los formularios******************
 
@@ -112,16 +112,25 @@
     //Aquí van a ir todas las validaciones.
   }
   const handleForm100=()=>{
-    alert("Estamos añadiendo los billetes de 100 mil -> " + oneHundred.value);
+    const porcentage=oneHundred.value*100/1000;
+    increment100(porcentage);
+    handleClose();
+    
   }
   const handleForm50=()=>{
-    alert("Estamos añadiendo los billetes de 50 mil -> " +fifty.value);
+    const porcentage=fifty.value*100/1000;
+    increment50(porcentage);
+    handleClose();
   }
   const handleForm20=()=>{
-    alert("Estamos añadiendo los billetes de 20 mil -> "+ twenty.value);
+    const porcentage=twenty.value*100/1000;
+    increment20(porcentage);
+    handleClose();
   }
    const handleForm10=()=>{
-    alert("Estamos añadiendo los billetes de 10 mil -> " + ten.value);
+    const porcentage=ten.value*100/1000;
+    increment10(porcentage);
+    handleClose();
   }
     
     

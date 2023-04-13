@@ -6,7 +6,7 @@ export const useMoneyStore = defineStore('money', {
         percentage100:70,
         percentage50:50,
         percentage20:20,
-        percentage10:10,
+        percentage10:10.5,
         //Variable para habilitar o desabilitar el modal
         showModal :false,
         //Este es el arreglo que habilita los contenedores para ingresar el dinero.
@@ -67,42 +67,42 @@ export const useMoneyStore = defineStore('money', {
         },
 
         //Acciones para el retiro de Efectivo.
-        async decrement100(value){
-            try{
-                //TODO: Aquí debe ir la validación para que mi contenedor no tenga valores negativos de billetes.
-                this.percentage100-=value;
-            }catch(err){
-                console.log(err);
-            }
+        // async decrement100(value){
+        //     try{
+        //         //TODO: Aquí debe ir la validación para que mi contenedor no tenga valores negativos de billetes.
+        //         this.percentage100-=value;
+        //     }catch(err){
+        //         console.log(err);
+        //     }
             
-        },
-        async decrement50(value){
-            try{
-                //TODO: Aquí debe ir la validación para que mi contenedor no tenga valores negativos de billetes.
-                this.percentage50-=value;
-            }catch(err){
-                console.log(err);
-            }
+        // },
+        // async decrement50(value){
+        //     try{
+        //         //TODO: Aquí debe ir la validación para que mi contenedor no tenga valores negativos de billetes.
+        //         this.percentage50-=value;
+        //     }catch(err){
+        //         console.log(err);
+        //     }
            
-        },
-        async decrement20(value){
-            try{
-                //TODO: Aquí debe ir la validación para que mi contenedor no tenga valores negativos de billetes.
-                this.percentage20-=value;
-            }catch(err){
-                console.log(err);
-            }
+        // },
+        // async decrement20(value){
+        //     try{
+        //         //TODO: Aquí debe ir la validación para que mi contenedor no tenga valores negativos de billetes.
+        //         this.percentage20-=value;
+        //     }catch(err){
+        //         console.log(err);
+        //     }
            
-        },
-        async decrement10(value){
-            try{
-                //TODO: Aquí debe ir la validación para que mi contenedor no tenga valores negativos de billetes.
-                this.percentage10-=value;
-            }catch(err){
-                console.log(err);
-            }
+        // },
+        // async decrement10(value){
+        //     try{
+        //         //TODO: Aquí debe ir la validación para que mi contenedor no tenga valores negativos de billetes.
+        //         this.percentage10-=value;
+        //     }catch(err){
+        //         console.log(err);
+        //     }
             
-        },
+        // },
         //Acciones para habilitar y desabilitar el modal
         
         handleClose() {
