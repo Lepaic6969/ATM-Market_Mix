@@ -40,8 +40,46 @@
                     role="dialog"
                     aria-modal="true"
                     >
-                 
-                    <form class="d-flex mb-5">
+
+                  <div class="d-flex">
+                    <form class="mb-5 me-3" v-if="container[0]" @submit.prevent="handleForm100">
+                          <div class="w-100 px-3 border-container bg-box " >
+                            <div class="mb-3">
+                                <label for="diez" class="form-label fw-bold ">Billetes de $100.000</label>
+                                <input type="number" class="form-control " id="diez" placeholder="Número de billetes">
+                            </div>
+                            <button type="submit" class="btn btn-pink w-100 fs-5">Agregar</button>
+                        </div>
+                    </form>
+                     <form class="mb-5 me-3" v-if="container[1]" @submit.prevent="handleForm50">
+                         <div class="w-100 px-3 border-container  bg-box" >
+                            <div class="mb-3">
+                                <label for="diez" class="form-label fw-bold">Billetes de $50.000</label>
+                                <input type="number" class="form-control " id="diez" placeholder="Número de billetes">
+                            </div>
+                            <button type="submit" class="btn btn-pink w-100 fs-5">Agregar</button>
+                        </div>
+                     </form>
+                      <form class="mb-5 me-3"  v-if="container[2]" @submit.prevent="handleForm20">
+                        <div class="w-100 px-3 border-container  bg-box" >
+                            <div class="mb-3">
+                                <label for="diez" class="form-label fw-bold">Billetes de $20.000</label>
+                                <input type="number" class="form-control " id="diez" placeholder="Número de billetes">
+                            </div>
+                            <button type="submit" class="btn btn-pink w-100 fs-5">Agregar</button>
+                        </div>
+                      </form>
+                      <form class="mb-5 me-3" v-if="container[3]" @submit.prevent="handleForm10">
+                           <div class="w-100 px-3 border-container  bg-box" >
+                            <div class="mb-3">
+                                <label for="diez" class="form-label fw-bold">Billetes de $10.000</label>
+                                <input type="number" class="form-control " id="diez" placeholder="Número de billetes">
+                            </div>
+                            <button type="submit" class="btn btn-pink w-100 fs-5">Agregar</button>
+                        </div>
+                      </form>
+                     </div>
+                    <!-- <form class="d-flex mb-5">
                         <div class="w-100 px-3 border-container bg-box me-3" v-if="container[0]">
                             <div class="mb-3">
                                 <label for="diez" class="form-label fw-bold ">Billetes de $100.000</label>
@@ -72,7 +110,7 @@
                         </div>
 
                        
-                    </form>
+                    </form> -->
                     </n-card>
                 </n-modal>
             </n-dialog-provider>
@@ -94,7 +132,19 @@
   const {showModal,container}=storeToRefs(moneyStore);
   const {handleClose,handleOpen}=moneyStore;
   
-    
+  //Programación para procesar los formularios.
+  const handleForm100=()=>{
+    alert("Estamos añadiendo los billetes de 100 mil");
+  }
+  const handleForm50=()=>{
+    alert("Estamos añadiendo los billetes de 50 mil");
+  }
+  const handleForm20=()=>{
+    alert("Estamos añadiendo los billetes de 20 mil");
+  }
+   const handleForm10=()=>{
+    alert("Estamos añadiendo los billetes de 10 mil");
+  }
     
     
  
