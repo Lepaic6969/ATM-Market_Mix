@@ -6,8 +6,8 @@
     </h2>
     <h3 class="text-center fw-light">(Mín. $10.000, Máx. $720.000)</h3>
     <div class="container mx-auto d-flex justify-content-center align-items-center">
-      <span class="sign">$</span>
       <input
+        id="value"
         type="number"
         class="form-control custom-input-number my-5"
         v-model.number="newValue"
@@ -15,6 +15,7 @@
         autofocus
         placeholder="0"
       />
+      <label for="value" class="value-format">{{ newValueFormat }}</label>
     </div>
     <!-- text-info -->
     <div class="text-info my-5">
@@ -74,6 +75,18 @@ export default {
     },
   },
 
+  computed: {
+    newValueFormat() {
+      const formatter = new Intl.NumberFormat("es-CO", {
+        style: "currency",
+        currency: "COP",
+        minimumFractionDigits: 0,
+      });
+
+      return formatter.format(this.newValue);
+    },
+  },
+
   watch: {
     newValue(value, oldValue) {
       if (value < 0) {
@@ -98,8 +111,20 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-.sign,
 .custom-input-number {
+  background-color: #f2f2f2;
+  color: #131240;
+  border: none;
+  font-size: 42px;
+  text-align: center;
+  font-weight: 700;
+  caret-color: transparent;
+  transition: ease-in-out;
+}
+
+.value-format {
+  position: absolute;
+  z-index: 100;
   background-color: #f2f2f2;
   color: #131240;
   border: none;
