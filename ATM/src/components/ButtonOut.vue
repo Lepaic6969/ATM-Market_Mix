@@ -1,6 +1,8 @@
 <template>
   <button @click="$emit('setValue')" class="btn btn-pink" v-if="value">{{ formatterPeso }}</button>
-  <button @click="$emit('showOtherValue')" class="btn btn-pink" v-else>{{ other }}</button>
+  <button @click="$emit(especialEvent)" class="btn btn-pink" v-else>
+    <i :class="classFaStart"></i> {{ other }}<i v-if="classFaEnd" :class="classFaEnd"></i>
+  </button>
 </template>
 
 <script>
@@ -11,6 +13,20 @@ export default {
     },
 
     other: {
+      type: String,
+      default: "Solicitar valor diferente",
+    },
+
+    especialEvent: {
+      type: String,
+      default: "showOtherValue",
+    },
+
+    classFaEnd: {
+      type: String,
+    },
+
+    classFaStart: {
       type: String,
     },
   },
@@ -40,7 +56,7 @@ export default {
   padding: 16px;
   font-weight: 700;
   transition: 0.3s ease-in-out;
-  font-size: 20px;
+  font-size: 24px;
 }
 
 .btn-pink:hover {
