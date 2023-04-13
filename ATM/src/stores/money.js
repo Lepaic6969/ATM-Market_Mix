@@ -29,7 +29,7 @@ export const useMoneyStore = defineStore('money', {
 
         },
         //Acciones para la carga de billetes.
-        async increment100(value){
+        async increment100(value,amountOfBills){
             try{
                 //TODO: Aquí debe ir la validación para que no se desborde mi contenedor.
                 this.percentage100+=value;
@@ -38,7 +38,7 @@ export const useMoneyStore = defineStore('money', {
             }
             
         },
-        async increment50(value){
+        async increment50(value,amountOfBills){
             try{
                 //TODO: Aquí debe ir la validación para que no se desborde mi contenedor.
                 this.percentage50+=value;
@@ -47,7 +47,7 @@ export const useMoneyStore = defineStore('money', {
             }
            
         },
-        async increment20(value){
+        async increment20(value,amountOfBills){
             try{
                 //TODO: Aquí debe ir la validación para que no se desborde mi contenedor.
                 this.percentage20+=value;
@@ -56,7 +56,7 @@ export const useMoneyStore = defineStore('money', {
             }
           
         },
-        async increment10(value){
+        async increment10(value,amountOfBills){
             try{
                 //TODO: Aquí debe ir la validación para que no se desborde mi contenedor.
                 this.percentage10+=value;
@@ -69,7 +69,6 @@ export const useMoneyStore = defineStore('money', {
         //Acciones para el retiro de Efectivo.
         // async decrement100(value){
         //     try{
-        //         //TODO: Aquí debe ir la validación para que mi contenedor no tenga valores negativos de billetes.
         //         this.percentage100-=value;
         //     }catch(err){
         //         console.log(err);
@@ -78,7 +77,6 @@ export const useMoneyStore = defineStore('money', {
         // },
         // async decrement50(value){
         //     try{
-        //         //TODO: Aquí debe ir la validación para que mi contenedor no tenga valores negativos de billetes.
         //         this.percentage50-=value;
         //     }catch(err){
         //         console.log(err);
@@ -87,7 +85,6 @@ export const useMoneyStore = defineStore('money', {
         // },
         // async decrement20(value){
         //     try{
-        //         //TODO: Aquí debe ir la validación para que mi contenedor no tenga valores negativos de billetes.
         //         this.percentage20-=value;
         //     }catch(err){
         //         console.log(err);
@@ -96,7 +93,6 @@ export const useMoneyStore = defineStore('money', {
         // },
         // async decrement10(value){
         //     try{
-        //         //TODO: Aquí debe ir la validación para que mi contenedor no tenga valores negativos de billetes.
         //         this.percentage10-=value;
         //     }catch(err){
         //         console.log(err);

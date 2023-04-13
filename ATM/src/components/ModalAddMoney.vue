@@ -15,19 +15,7 @@
                     Agregar Efectivo
                 </n-button>
                 </n-space>
-                <!-- <n-button @click="showModal = true">
-                    Start Me up
-                </n-button> -->
-                <!-- <n-modal
-                v-model:show="showModal"
-                :mask-closable="false"
-                preset="dialog"
-                title="Agregando Dinero"
-                content="<form><input type='text'></form>"
-                positive-text="Confirm"
-                negative-text="Cancel"
-                
-                /> -->
+          
                 <n-modal v-model:show="showModal" class="mx-auto" >
                    
                     <n-card
@@ -110,27 +98,43 @@
   const ten=ref('');
   const validateData=()=>{
     //Aquí van a ir todas las validaciones.
+    //1.Que el dato ingresado sea numérico.
+    //2.Que el dato ingresado sea mayor que 0.
+    //3.Que el dato ingresado no rebose al contenedor.
   }
   const handleForm100=()=>{
     const porcentage=oneHundred.value*100/1000;
-    increment100(porcentage);
-    handleClose();
+    increment100(porcentage,oneHundred.value);
+    oneHundred.value="";
+    if(!container.value[1]){
+      handleClose();
+    }
+   
     
   }
   const handleForm50=()=>{
     const porcentage=fifty.value*100/1000;
-    increment50(porcentage);
-    handleClose();
+    increment50(porcentage,fifty.value);
+    fifty.value="";
+    if(!container.value[0]){
+      handleClose();
+    }
   }
   const handleForm20=()=>{
     const porcentage=twenty.value*100/1000;
-    increment20(porcentage);
-    handleClose();
+    increment20(porcentage,twenty.value);
+    twenty.value="";
+    if(!container.value[0]){
+      handleClose();
+    }
   }
    const handleForm10=()=>{
     const porcentage=ten.value*100/1000;
-    increment10(porcentage);
-    handleClose();
+    increment10(porcentage,ten.value);
+    ten.value="";
+    if(!container.value[1]){
+      handleClose();
+    }
   }
     
     

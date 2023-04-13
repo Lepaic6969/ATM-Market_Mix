@@ -26,7 +26,7 @@
       <!-- Diagramas Circulares -->
       <div v-if="diagramType==='circle'" class="mt-5">
         <n-progress
-        style="margin: 0 60px 12px 0"
+        style="margin: 0 40px 12px 0"
         type="circle"
         :percentage="percentage100"
         color="rgb(78,146,137)"
@@ -35,7 +35,7 @@
         @click="handleOpenCustom(0)"
         />
         <n-progress
-        style="margin: 0 60px 12px 0"
+        style="margin: 0 40px 12px 0"
         type="circle"
         :percentage="percentage50"
         color="rgba(106, 13, 173,0.9)"
@@ -44,7 +44,7 @@
         @click="handleOpenCustom(1)"
         />
         <n-progress
-        style="margin: 0 60px 12px 0"
+        style="margin: 0 40px 12px 0"
         type="circle"
         :percentage="percentage20"
         color="rgb(251,130,72)"
@@ -53,7 +53,7 @@
         @click="handleOpenCustom(2)"
         />
         <n-progress
-        style="margin: 0 60px 12px 0"
+        style="margin: 0 40px 12px 0"
         type="circle"
         :percentage="percentage10"
         color="rgb(210,42,35)"

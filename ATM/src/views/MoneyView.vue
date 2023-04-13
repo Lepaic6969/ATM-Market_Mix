@@ -1,21 +1,8 @@
 <template>
   <div class="w-100 bg-total d-flex flex-column justify-content-center ">
-    <div class="w-75 mx-auto  bg-content p-3 ">
+    <div class="w-75 mx-auto  bg-content p-5 ">
         <ProgressBar class="h-progress-bar"/>
         <Legend/>
-        <!-- Botón para agregar Efectivo -->
-        <!-- <n-space class="mt-5">
-          <n-button icon-placement="left" >
-            <template #icon>
-              <n-icon>
-                <MdCash/>
-              </n-icon>
-            </template>
-            Agregar Efectivo
-          </n-button>
-        </n-space> -->
-        <!--Modal para agregar dinero -->
-        
         <n-loading-bar-provider >
         <n-message-provider>
         <n-notification-provider>
