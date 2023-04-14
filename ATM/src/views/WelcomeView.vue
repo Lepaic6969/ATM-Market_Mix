@@ -82,7 +82,7 @@
 </template>
 
 <script>
-
+import fetchData from '../helpers/fetchData.js';
 import { NIcon } from "naive-ui";
 import { ChevronForwardCircle, CloseCircle } from "@vicons/ionicons5";
 export default {
@@ -125,10 +125,22 @@ export default {
         this.documento = this.documento.slice(0, -1);
       }
     },
-    async makeRequest(data){
 
+    async makeRequest(objectData){
+          try{
+            const {data}=await fetchData("/accounts/login","post",objectData);
+            localStorage.setItem("token",data.token);
+            if(this.documento==="1234567890"){
+                this.$router.push("/money")
+            }else{
+              this.$router.push("/cashout")
+            }
+          }catch(err){
+            console.log(err);
+          }
     },
-    go() {
+  
+    async go() {
       if (this.contrasena.length < 4 || this.documento.length < 10) {
         alert(
           "La contraseña debe tener al menos 4 caracteres y el número debe tener al menos 10 dígitos"
@@ -139,15 +151,20 @@ export default {
           identification: this.documento,
           pin: this.contrasena
         }
-        const 
+      
+        await this.makeRequest(data);
+        
+        
 
-
-        this.documento =""
-        this.contrasena = ""
-        console.log("Continuar");
+      
+        
       }
     },
   },
+  unmounted(){
+    this.documento =""
+    this.contrasena = ""
+  }
 };
 </script>
 
