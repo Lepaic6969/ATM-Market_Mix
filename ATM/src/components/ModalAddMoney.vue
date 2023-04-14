@@ -106,12 +106,23 @@
   const twentyOk=ref(true);
   const tenOk=ref(true);
 
-  const validateData=()=>{
-    //Aquí van a ir todas las validaciones.
-    //1.Que el dato ingresado sea numérico.
-    //2.Que el dato ingresado sea mayor que 0.
+  const validateData=(number,numberOk)=>{
+    let flag=true;
+    if(typeof number.value !=='number'){
+      flag=false;
+      numberOk.value=false;
+    }
+    if(number.value<0){
+      flag=false;
+      numberOk.value=false;
+    }
+    return flag;s
   }
   const handleForm100=()=>{
+    /************************************************/
+    if(!validateData(oneHundred,oneHundredOk))return;
+    oneHundredOk.value=true;
+    /************************************************/
     const porcentage=oneHundred.value*100/1000;
     increment100(porcentage,oneHundred.value);
     oneHundred.value="";
@@ -122,6 +133,10 @@
     
   }
   const handleForm50=()=>{
+    /************************************************/
+    if(!validateData(fifty,fiftyOk))return;
+    fiftyOk.value=true;
+    /************************************************/
     const porcentage=fifty.value*100/1000;
     increment50(porcentage,fifty.value);
     fifty.value="";
@@ -130,6 +145,10 @@
     }
   }
   const handleForm20=()=>{
+     /************************************************/
+    if(!validateData(twenty,twentyOk))return;
+    twentyOk.value=true;
+    /************************************************/
     const porcentage=twenty.value*100/1000;
     increment20(porcentage,twenty.value);
     twenty.value="";
@@ -138,6 +157,10 @@
     }
   }
    const handleForm10=()=>{
+    /************************************************/
+    if(!validateData(ten,tenOk))return;
+    tenOk.value=true;
+    /************************************************/
     const porcentage=ten.value*100/1000;
     increment10(porcentage,ten.value);
     ten.value="";

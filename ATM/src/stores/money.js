@@ -31,7 +31,7 @@ export const useMoneyStore = defineStore('money', {
         //Acciones para la carga de billetes.
         async increment100(value,amountOfBills){
             try{
-                //TODO: Aquí debe ir la validación para que no se desborde mi contenedor.
+                console.log(amountOfBills);
                 this.percentage100+=value;
             }catch(err){
                 console.log(err)
@@ -40,7 +40,7 @@ export const useMoneyStore = defineStore('money', {
         },
         async increment50(value,amountOfBills){
             try{
-                //TODO: Aquí debe ir la validación para que no se desborde mi contenedor.
+                console.log(amountOfBills);
                 this.percentage50+=value;
             }catch(err){
                 console.log(err)
@@ -49,7 +49,7 @@ export const useMoneyStore = defineStore('money', {
         },
         async increment20(value,amountOfBills){
             try{
-                //TODO: Aquí debe ir la validación para que no se desborde mi contenedor.
+                console.log(amountOfBills);
                 this.percentage20+=value;
             }catch(err){
                 console.log(err);
@@ -58,7 +58,7 @@ export const useMoneyStore = defineStore('money', {
         },
         async increment10(value,amountOfBills){
             try{
-                //TODO: Aquí debe ir la validación para que no se desborde mi contenedor.
+                console.log(amountOfBills);
                 this.percentage10+=value;
             }catch(err){
                 console.log(err);
@@ -66,39 +66,7 @@ export const useMoneyStore = defineStore('money', {
            
         },
 
-        //Acciones para el retiro de Efectivo.
-        // async decrement100(value){
-        //     try{
-        //         this.percentage100-=value;
-        //     }catch(err){
-        //         console.log(err);
-        //     }
-            
-        // },
-        // async decrement50(value){
-        //     try{
-        //         this.percentage50-=value;
-        //     }catch(err){
-        //         console.log(err);
-        //     }
-           
-        // },
-        // async decrement20(value){
-        //     try{
-        //         this.percentage20-=value;
-        //     }catch(err){
-        //         console.log(err);
-        //     }
-           
-        // },
-        // async decrement10(value){
-        //     try{
-        //         this.percentage10-=value;
-        //     }catch(err){
-        //         console.log(err);
-        //     }
-            
-        // },
+
         //Acciones para habilitar y desabilitar el modal
         
         handleClose() {
