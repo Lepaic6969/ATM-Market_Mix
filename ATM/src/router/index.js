@@ -8,6 +8,9 @@ const router = createRouter({
       path: "/cashout",
       name: "cashout",
       component: () => import("../views/CashOutView.vue"),
+      path: "/",
+      name: "welcome",
+      component: () => import("../views/WelcomeView.vue")
     },
     {
       path: '/money',
