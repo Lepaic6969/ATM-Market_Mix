@@ -21,7 +21,7 @@
                     <n-card
                     class="color-text"
                     closable @close="handleClose"
-                    style="width:auto; max-width:95%;height: 350px;"
+                    style="width:auto; max-width:95%;min-height: 350px; height: auto;"
                     title="VivaBanco"
                     :bordered="false"
                     size="huge"
@@ -35,6 +35,7 @@
                             <div class="mb-3">
                                 <label for="diez" class="form-label fw-bold ">Billetes de $100.000</label>
                                 <input type="number" class="form-control " id="diez" placeholder="Número de billetes" v-model="oneHundred">
+                                <div class="form-text" style="color:#f23078;font-size: 16px;" v-if="!oneHundredOk">Dato Incorrecto.</div>
                             </div>
                             <button type="submit" class="btn btn-pink w-100 fs-5">Agregar</button>
                         </div>
@@ -44,6 +45,7 @@
                             <div class="mb-3">
                                 <label for="diez" class="form-label fw-bold">Billetes de $50.000</label>
                                 <input type="number" class="form-control " id="diez" placeholder="Número de billetes" v-model="fifty" >
+                                <div class="form-text" style="color:#f23078;font-size: 16px;" v-if="!fiftyOk">Dato Incorrecto.</div>
                             </div>
                             <button type="submit" class="btn btn-pink w-100 fs-5">Agregar</button>
                         </div>
@@ -53,6 +55,7 @@
                             <div class="mb-3">
                                 <label for="diez" class="form-label fw-bold">Billetes de $20.000</label>
                                 <input type="number" class="form-control " id="diez" placeholder="Número de billetes" v-model="twenty">
+                                <div class="form-text" style="color:#f23078;font-size: 16px;" v-if="!twentyOk">Dato Incorrecto.</div>
                             </div>
                             <button type="submit" class="btn btn-pink w-100 fs-5">Agregar</button>
                         </div>
@@ -62,6 +65,7 @@
                             <div class="mb-3">
                                 <label for="diez" class="form-label fw-bold">Billetes de $10.000</label>
                                 <input type="number" class="form-control " id="diez" placeholder="Número de billetes" v-model="ten">
+                                <div class="form-text" style="color:#f23078;font-size: 16px;" v-if="!tenOk">Dato Incorrecto.</div>
                             </div>
                             <button type="submit" class="btn btn-pink w-100 fs-5">Agregar</button>
                         </div>
@@ -96,11 +100,16 @@
   const fifty=ref('');
   const twenty=ref('');
   const ten=ref('');
+  //Variables reactivas para los mensajes de error.
+  const oneHundredOk=ref(true);
+  const fiftyOk=ref(true);
+  const twentyOk=ref(true);
+  const tenOk=ref(true);
+
   const validateData=()=>{
     //Aquí van a ir todas las validaciones.
     //1.Que el dato ingresado sea numérico.
     //2.Que el dato ingresado sea mayor que 0.
-    //3.Que el dato ingresado no rebose al contenedor.
   }
   const handleForm100=()=>{
     const porcentage=oneHundred.value*100/1000;
