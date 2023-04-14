@@ -7,6 +7,7 @@
     <h3 class="text-center fw-light">(Mín. $10.000, Máx. $720.000)</h3>
     <div class="container mx-auto d-flex justify-content-center align-items-center">
       <input
+        ref="input"
         id="value"
         type="number"
         class="form-control custom-input-number my-5"
@@ -62,6 +63,10 @@ export default {
     };
   },
 
+  mounted() {
+    window.addEventListener("keydown", this.handleKeyDown);
+  },
+
   methods: {
     preventMinusSign(e) {
       const formatNumber = Number(e.key);
@@ -83,6 +88,13 @@ export default {
         setTimeout(() => {
           this.newValue = null;
         }, 0);
+      }
+    },
+
+    handleKeyDown(e) {
+      const pressedKey = e.key;
+      if (/^\d$/.test(pressedKey) || pressedKey === "Backspace") {
+        this.$refs.input.focus();
       }
     },
   },
@@ -134,21 +146,23 @@ input[type="number"] {
   caret-color: transparent;
   width: 840px;
   height: 75px;
+  opacity: 0;
   transition: ease-in-out;
 }
 
 .value-format {
   position: absolute;
   z-index: 100;
-  background-color: #f2f2f2;
-  color: #131240;
+  /* background-color: #f2f2f2; */
+  color: white;
   border: none;
   border-radius: 20px;
-  font-size: 42px;
+  font-size: 72px;
   text-align: center;
   width: 840px;
   height: 75px;
   font-weight: 700;
+  margin: 0 auto;
   caret-color: transparent;
   transition: ease-in-out;
 }
