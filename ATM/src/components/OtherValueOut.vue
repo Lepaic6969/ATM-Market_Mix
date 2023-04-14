@@ -19,13 +19,16 @@
     </div>
     <!-- text-info -->
     <div class="text-info my-5">
-      <h3 class="text-center">Si es correcto pulsa <b>Enter</b> o <b>Continuar</b></h3>
-      <h3 class="text-center">Si no es correcto pulsa <b>Retroceso</b> o <b>Borrar</b></h3>
+      <h3 class="text-center my-3">Si es correcto pulsa <b>Enter</b> o <b>Continuar</b></h3>
+      <h3 class="text-center my-3">Si no es correcto pulsa <b>Retroceso</b> o <b>Borrar</b></h3>
+      <h6 class="text-center my-3 text-info-light">
+        <b>Retroceso</b> Elimina el ultimo digito / <b>Borrar</b> Limpia todo el valor
+      </h6>
     </div>
     <!-- buttons -->
     <div class="row d-flex justify-content-center align items-center">
       <ButtonOut
-        @showOtherValue="$emit('showOtherValue')"
+        @click="deleteString"
         class="col-5"
         other="Borrar"
         classFaStart="fa-solid fa-delete-left"
@@ -73,6 +76,15 @@ export default {
         e.preventDefault();
       }
     },
+
+    deleteString() {
+      if (this.newValue) {
+        this.$refs.audioPlayer.play();
+        setTimeout(() => {
+          this.newValue = null;
+        }, 0);
+      }
+    },
   },
 
   computed: {
@@ -115,10 +127,13 @@ input[type="number"] {
   background-color: #f2f2f2;
   color: #131240;
   border: none;
+  border-radius: 20px;
   font-size: 42px;
   text-align: center;
   font-weight: 700;
   caret-color: transparent;
+  width: 840px;
+  height: 75px;
   transition: ease-in-out;
 }
 
@@ -128,8 +143,11 @@ input[type="number"] {
   background-color: #f2f2f2;
   color: #131240;
   border: none;
+  border-radius: 20px;
   font-size: 42px;
   text-align: center;
+  width: 840px;
+  height: 75px;
   font-weight: 700;
   caret-color: transparent;
   transition: ease-in-out;
@@ -151,5 +169,8 @@ input[type="number"] {
 
 .text-info {
   color: #32d9d9 !important;
+}
+.text-info-light {
+  color: #78778c !important;
 }
 </style>
