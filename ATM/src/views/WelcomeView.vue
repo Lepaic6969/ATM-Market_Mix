@@ -82,6 +82,7 @@
 </template>
 
 <script>
+
 import { NIcon } from "naive-ui";
 import { ChevronForwardCircle, CloseCircle } from "@vicons/ionicons5";
 export default {
@@ -124,6 +125,9 @@ export default {
         this.documento = this.documento.slice(0, -1);
       }
     },
+    async makeRequest(data){
+
+    },
     go() {
       if (this.contrasena.length < 4 || this.documento.length < 10) {
         alert(
@@ -131,6 +135,13 @@ export default {
         );
       } else {
         // Continúa con la lógica normal
+        const data={
+          identification: this.documento,
+          pin: this.contrasena
+        }
+        const 
+
+
         this.documento =""
         this.contrasena = ""
         console.log("Continuar");
