@@ -69,15 +69,13 @@ export default {
 
   methods: {
     preventMinusSign(e) {
-      const formatNumber = Number(e.key);
+      const pressedKey = e.key;
 
-      if (formatNumber || e.key === "0" || e.key === "Backspace") {
+      if (/^\d$/.test(pressedKey) || pressedKey === "Backspace") {
         setTimeout(() => {
           this.$refs.audioPlayer.play();
         }, 320);
-      }
-
-      if (e.key !== "0" && !Number(formatNumber) && e.key !== "Backspace") {
+      } else {
         e.preventDefault();
       }
     },
