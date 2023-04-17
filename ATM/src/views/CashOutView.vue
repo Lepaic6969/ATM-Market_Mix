@@ -38,6 +38,8 @@ export default {
     return {
       values: [10000, 20000, 50000, 100000, 200000, 300000, 400000, 500000, 600000],
       isShow: false,
+      inactiveTime: 0,
+      interval: null,
     };
   },
 
@@ -57,6 +59,40 @@ export default {
       this.soundKeys();
       console.log("esperando backend");
     },
+
+    rebootTime() {
+      this.inactiveTime = 0;
+    },
+
+    outRoute() {
+      clearInterval(this.interval);
+      this.$router.push({ name: "welcome" });
+    },
+
+    detecInactive() {
+      this.inactiveTime++;
+      console.log(this.inactiveTime);
+      if (this.inactiveTime > 15) {
+        this.outRoute();
+      }
+    },
+  },
+
+  mounted() {
+    window.addEventListener("mousemove", this.rebootTime);
+    window.addEventListener("touchmove", this.rebootTime);
+    window.addEventListener("keydown", this.rebootTime);
+
+    if (this.$route.fullPath === "/cashout") {
+      this.interval = setInterval(() => {
+        this.detecInactive();
+      }, 1000);
+    }
+  },
+
+  beforeMount() {
+    window.removeEventListener("mous", this.rebootTime);
+    window.removeEventListener("keydown", this.rebootTime);
   },
 };
 </script>

@@ -69,15 +69,7 @@ export default {
 
   methods: {
     preventMinusSign(e) {
-      const pressedKey = e.key;
-
-      if (/^\d$/.test(pressedKey) || pressedKey === "Backspace") {
-        setTimeout(() => {
-          this.$refs.audioPlayer.play();
-        }, 320);
-      } else {
-        e.preventDefault();
-      }
+      this.handleKeyDown(e);
     },
 
     deleteString() {
@@ -93,6 +85,11 @@ export default {
       const pressedKey = e.key;
       if (/^\d$/.test(pressedKey) || pressedKey === "Backspace") {
         this.$refs.input.focus();
+        setTimeout(() => {
+          this.$refs.audioPlayer.play();
+        }, 320);
+      } else {
+        e.preventDefault();
       }
     },
   },
