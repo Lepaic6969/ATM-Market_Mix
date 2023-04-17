@@ -7,7 +7,7 @@ const router = createRouter({
     {
       path: "/",
       name: "welcome",
-      component: () => import("../views/WelcomeView.vue")
+      component: () => import("../views/WelcomeView.vue"),
     },
     {
       path: "/cashout",
@@ -15,10 +15,10 @@ const router = createRouter({
       component: () => import("../views/CashOutView.vue"),
     },
     {
-      path: '/money',
-      name: 'money',
-      component: () => import('../views/MoneyView.vue')
-    }
+      path: "/money",
+      name: "money",
+      component: () => import("../views/MoneyView.vue"),
+    },
   ],
 });
 

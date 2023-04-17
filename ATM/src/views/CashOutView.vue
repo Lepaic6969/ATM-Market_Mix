@@ -3,7 +3,7 @@
     <div class="container text-center mx-auto">
       <h1 class="fw-bold py-3 text-start">VivaBanco</h1>
     </div>
-    <div class="row d-flex justify-content-center align items-center" v-if="!isShow">
+    <!-- <div class="row d-flex justify-content-center align items-center" v-if="!isShow">
       <h2 class="fw-light pb-3 text-center">Selecciona el valor a retirar</h2>
       <ButtonOut
         @setValue="cashOut"
@@ -13,7 +13,8 @@
         class="col-5"
       />
       <ButtonOut @showOtherValue="otherValue" class="col-5" />
-    </div>
+    </div> -->
+    <Values v-if="!isShow" @showOtherValue="showOtherValue" @setValue="cashOut" />
 
     <!-- Other Component  Other Value-->
     <OtherValueOut v-else @showOtherValue="otherValue" />
@@ -32,11 +33,12 @@ export default {
   components: {
     ButtonOut: defineAsyncComponent(() => import("@/components/ButtonOut.vue")),
     OtherValueOut: defineAsyncComponent(() => import("@/components/OtherValueOut.vue")),
+    Values: defineAsyncComponent(() => import("@/components/Values.vue")),
   },
 
   data() {
     return {
-      values: [10000, 20000, 50000, 100000, 200000, 300000, 400000, 500000, 600000],
+      // values: [10000, 20000, 50000, 100000, 200000, 300000, 400000, 500000, 600000],
       isShow: false,
       inactiveTime: 0,
       interval: null,
@@ -50,9 +52,9 @@ export default {
       }, 320);
     },
 
-    otherValue() {
+    showOtherValue(value) {
       this.soundKeys();
-      this.isShow = true;
+      this.isShow = value;
     },
 
     cashOut() {
@@ -83,11 +85,11 @@ export default {
     window.addEventListener("touchmove", this.rebootTime);
     window.addEventListener("keydown", this.rebootTime);
 
-    if (this.$route.fullPath === "/cashout") {
-      this.interval = setInterval(() => {
-        this.detecInactive();
-      }, 1000);
-    }
+    // if (this.$route.fullPath === "/cashout") {
+    //   this.interval = setInterval(() => {
+    //     this.detecInactive();
+    //   }, 1000);
+    // }
   },
 
   beforeMount() {
