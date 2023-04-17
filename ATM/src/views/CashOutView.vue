@@ -3,21 +3,14 @@
     <div class="container text-center mx-auto">
       <h1 class="fw-bold py-3 text-start">VivaBanco</h1>
     </div>
-    <!-- <div class="row d-flex justify-content-center align items-center" v-if="!isShow">
-      <h2 class="fw-light pb-3 text-center">Selecciona el valor a retirar</h2>
-      <ButtonOut
-        @setValue="cashOut"
-        v-for="value in values"
-        :key="value"
-        :value="value"
-        class="col-5"
-      />
-      <ButtonOut @showOtherValue="otherValue" class="col-5" />
-    </div> -->
+    <!-- Values -->
     <Values v-if="!isShow" @showOtherValue="showOtherValue" @setValue="cashOut" />
 
     <!-- Other Component  Other Value-->
     <OtherValueOut v-else @showOtherValue="otherValue" />
+
+    <!-- Cash -->
+    <!-- <Cash /> -->
 
     <!-- audio -->
     <audio ref="audioPlayer">
@@ -27,13 +20,15 @@
 </template>
 
 <script>
-import { defineAsyncComponent } from "vue";
+import OtherValueOut from "@/components/OtherValueOut.vue";
+import Values from "@/components/Values.vue";
+import Cash from "@/components/Cash.vue";
 
 export default {
   components: {
-    ButtonOut: defineAsyncComponent(() => import("@/components/ButtonOut.vue")),
-    OtherValueOut: defineAsyncComponent(() => import("@/components/OtherValueOut.vue")),
-    Values: defineAsyncComponent(() => import("@/components/Values.vue")),
+    OtherValueOut,
+    Values,
+    Cash,
   },
 
   data() {
@@ -73,7 +68,7 @@ export default {
 
     detecInactive() {
       this.inactiveTime++;
-      console.log(this.inactiveTime);
+      // console.log(this.inactiveTime);
       if (this.inactiveTime > 15) {
         this.outRoute();
       }
