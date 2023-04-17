@@ -77,6 +77,10 @@
             </n-notification-provider>
         </n-message-provider>
         </n-loading-bar-provider>
+
+      <audio ref="audioPlayer">
+        <source src="../assets/audio/caja-registradora dinero.mp3" type="audio/mpeg" />
+      </audio>
         
     </div>
     
@@ -87,14 +91,18 @@
   import {MdCash,MdClose} from '@vicons/ionicons4';
   import {useMoneyStore} from '../stores/money.js';
   import { storeToRefs } from "pinia";
-  import {ref} from 'vue';
+  import {ref,watch} from 'vue';
 
   const moneyStore=useMoneyStore();
   const {showModal,container}=storeToRefs(moneyStore);
   const {handleClose,handleOpen,increment100,increment50,increment20,increment10}=moneyStore;
   
   //**********Programación para procesar los formularios******************
-
+  //Sonido que se debe activar al abrir el modal del formulario.
+  const audioPlayer=ref(null);
+  const soundKeys=()=>{
+     audioPlayer.value.play();
+  }
   //Variables reactivas de los formularios.
   const oneHundred=ref('');
   const fifty=ref('');
@@ -168,8 +176,14 @@
       handleClose();
     }
   }
+
+  watch(showModal, (newShowModal, oldShowModal) => {
+      if(newShowModal){
+        soundKeys();
+      }
+  });
     
-    
+   
  
   </script>
 

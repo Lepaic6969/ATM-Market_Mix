@@ -82,6 +82,7 @@ export const useMoneyStore = defineStore('money', {
             this.container=[false,false,false,false];
             this.container[index]=true;
             this.showModal=true;
+            
         }
       
     },

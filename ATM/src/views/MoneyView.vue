@@ -1,7 +1,7 @@
 <template>
   <div class="w-100 bg-total d-flex flex-column justify-content-center ">
-    <div class="w-75 mx-auto  bg-content p-5 ">
-        <ProgressBar class="h-progress-bar"/>
+    <div class=" mx-auto  bg-content p-5 " style="width: 95%;">
+        <ProgressBar class="h-progress-bar mx-auto"/>
         <Legend/>
         <n-loading-bar-provider >
         <n-message-provider>
@@ -30,7 +30,7 @@ import Legend from '../components/Legend.vue';
   background-color: #f2f2f2;
   border-radius: 20px;
   width: 90%;
-  border:3px solid #78778c;
+  border:2px solid #f23078;
   
 
 }

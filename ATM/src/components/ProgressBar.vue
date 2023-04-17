@@ -26,7 +26,7 @@
       <!-- Diagramas Circulares -->
       <div v-if="diagramType==='circle'" class="mt-5">
         <n-progress
-        style="margin: 0 40px 12px 0"
+        style="margin: 0 60px 12px 0"
         type="circle"
         :percentage="percentage100"
         color="rgb(78,146,137)"
@@ -35,7 +35,7 @@
         @click="handleOpenCustom(0)"
         />
         <n-progress
-        style="margin: 0 40px 12px 0"
+        style="margin: 0 60px 12px 0"
         type="circle"
         :percentage="percentage50"
         color="rgba(106, 13, 173,0.9)"
@@ -44,7 +44,7 @@
         @click="handleOpenCustom(1)"
         />
         <n-progress
-        style="margin: 0 40px 12px 0"
+        style="margin: 0 60px 12px 0"
         type="circle"
         :percentage="percentage20"
         color="rgb(251,130,72)"
@@ -53,7 +53,7 @@
         @click="handleOpenCustom(2)"
         />
         <n-progress
-        style="margin: 0 40px 12px 0"
+        style="margin: 0 60px 12px 0"
         type="circle"
         :percentage="percentage10"
         color="rgb(210,42,35)"
@@ -103,7 +103,13 @@
         @click="handleOpenCustom(3)"
         />
       </div>
+
+          <!-- audio -->
+      <audio ref="audioPlayer">
+        <source src="../assets/audio/sound-keys.mp3" type="audio/mpeg" />
+      </audio>
     </div>
+  
 </template>
   
   <script setup>
@@ -116,11 +122,18 @@
   const {percentage10,percentage20,percentage50,percentage100} =storeToRefs(moneyStore);
   const {handleOpenCustom}=moneyStore;
 
+  //Función para el sonido en los botones...
+  const audioPlayer=ref(null);
+  const soundKeys=()=>{
+     audioPlayer.value.play();
+  }
+
   //Variable que se encarga de habilitar las barras o los diagramas circulares.
   const diagramType=ref("bars");
   //Función para habilitar el tipo de diagramas
   const setDiagramType=(type)=>{
     diagramType.value=type;
+    soundKeys();
   }
 
   </script>
