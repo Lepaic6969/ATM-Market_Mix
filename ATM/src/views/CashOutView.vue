@@ -4,31 +4,40 @@
       <h1 class="fw-bold py-3 text-start">VivaBanco</h1>
     </div>
     <!-- Values -->
-    <Values v-if="!isShow" @showOtherValue="showOtherValue" @setValue="cashOut" />
+    <Values
+      v-if="!isShow && !withdrawal"
+      @showOtherValue="showOtherValue"
+      @setValue="cashOut"
+      v-show="withdrawal"
+    />
 
     <!-- Other Component  Other Value-->
-    <OtherValueOut v-else @showOtherValue="otherValue" />
+    <OtherValueOut v-if="isShow && !withdrawal" @showOtherValue="cashOut" />
 
     <!-- Cash -->
-    <!-- <Cash /> -->
+    <Cash v-if="withdrawal" :cash="cash" :rest="restOptions" />
 
     <!-- audio -->
     <audio ref="audioPlayer">
       <source src="../assets/audio/sound-keys.mp3" type="audio/mpeg" />
     </audio>
+    <!-- audio cashOut -->
+    <audio ref="cashOutAudio">
+      <source src="../assets/audio/sound-cashout.mp3" type="audio/mpeg" />
+    </audio>
   </div>
 </template>
 
 <script>
-import OtherValueOut from "@/components/OtherValueOut.vue";
-import Values from "@/components/Values.vue";
-import Cash from "@/components/Cash.vue";
+import { defineAsyncComponent } from "vue";
+import fetchData from "../helpers/fetchData";
+import Swal from "sweetalert2";
 
 export default {
   components: {
-    OtherValueOut,
-    Values,
-    Cash,
+    OtherValueOut: defineAsyncComponent(() => import("@/components/OtherValueOut.vue")),
+    Values: defineAsyncComponent(() => import("@/components/Values.vue")),
+    Cash: defineAsyncComponent(() => import("@/components/Cash.vue")),
   },
 
   data() {
@@ -37,7 +46,10 @@ export default {
       isShow: false,
       inactiveTime: 0,
       interval: null,
-      user: null,
+      user: {},
+      withdrawal: false,
+      cash: null,
+      restOptions: null,
     };
   },
 
@@ -48,15 +60,60 @@ export default {
       }, 320);
     },
 
+    playSoundWithdrawal() {
+      this.$refs.cashOutAudio.play();
+    },
+
     showOtherValue(value) {
       this.soundKeys();
       this.isShow = value;
     },
 
-    cashOut() {
+    // withdrawal
+    async cashOut(amount) {
       this.soundKeys();
-      console.log("esperando backend");
+
+      if (amount % 10000 !== 0) {
+        Swal.fire("Error", `la cantidad ${amount} deben ser múltiplos de $10.000 `, "error");
+        return false;
+      }
+
+      if (amount === 0) {
+        amount = 10000;
+      }
+
+      const { id: accountId, ...rest } = { ...this.user.account };
+      this.restOptions = rest;
+
+      const dataToSave = {
+        transactionType: "withdrawal",
+        hundred: 0,
+        fifty: 0,
+        twenty: 0,
+        ten: 0,
+        amount,
+        atmId: 7,
+        accountId,
+      };
+
+      // console.log(dataToSave);
+
+      const { data } = await fetchData("/transactions", "post", dataToSave);
+
+      this.playSoundWithdrawal();
+      this.withdrawal = true;
+
+      setTimeout(() => {
+        this.cash = data;
+      }, 2800);
+
+      setTimeout(() => {
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        this.$router.push({ name: "welcome" });
+      }, 15000);
     },
+    // end withdrawal
 
     rebootTime() {
       this.inactiveTime = 0;
@@ -79,23 +136,23 @@ export default {
   created() {
     const user = localStorage.getItem("user");
     if (user) {
-      this.user = JSON.parse(user);
-      console.log(this.user);
+      this.user = { ...JSON.parse(user) };
     } else {
       this.$router.push({ name: "welcome" });
     }
   },
 
   mounted() {
+    document.title = "Retiros";
     window.addEventListener("mousemove", this.rebootTime);
     window.addEventListener("touchmove", this.rebootTime);
     window.addEventListener("keydown", this.rebootTime);
 
-    // if (this.$route.fullPath === "/cashout") {
-    //   this.interval = setInterval(() => {
-    //     this.detecInactive();
-    //   }, 1000);
-    // }
+    if (this.$route.fullPath === "/cashout") {
+      this.interval = setInterval(() => {
+        this.detecInactive();
+      }, 1000);
+    }
   },
 
   beforeMount() {
