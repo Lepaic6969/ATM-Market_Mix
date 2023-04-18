@@ -9,7 +9,7 @@
               <n-space vertical>
                 <h2>
                   Bienvenido a VivaBanco
-                  <p class="text-center">Número {{ Número }}</p>
+                  <p class="text-center">Cajero: {{ numb }}</p>
                 </h2>
 
                 <div class="imgs1">
@@ -91,6 +91,7 @@ export default {
       numeros: [1, 2, 3, 4, 5, 6, 7, 8, 9],
       showImage: false,
       showImages: false,
+      numb:[]
     };
   },
   methods: {
@@ -121,8 +122,6 @@ export default {
 
     async makeRequest(objectData) {
       try {
-        const atmData = await fetchData("/atmdetails");
-        console.log("ATM", atmData);
         const { data } = await fetchData("/accounts/login", "post", objectData);
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data));
@@ -133,13 +132,20 @@ export default {
           this.$router.push("/cashout");
         }
       } catch (err) {
-        if (err.response.status === 404) {
-          alert("No se encontró el usuario");
-        } else {
           console.log(err);
-        }
       }
     },
+     async atms() {
+      try {
+        const atmD = await fetchData("/atmdetails");
+        this.numb = atmD[0].id
+        console.log(this.numb)
+        console.log(atmD)
+      } catch (err) {
+          console.log(err);
+      }
+     },
+
     async go() {
       if (this.contrasena.length < 4 || this.documento.length < 10) {
         alert(
@@ -154,11 +160,15 @@ export default {
         await this.makeRequest(data);
       }
     },
+    
   },
   unmounted() {
     this.documento = "";
     this.contrasena = "";
   },
+  created(){
+    this.atms()
+  }
 };
 </script>
 
