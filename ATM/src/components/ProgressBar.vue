@@ -126,12 +126,6 @@ const soundKeys = () => {
   audioPlayer.value.play();
 };
 
-<<<<<<< HEAD
-  onMounted(()=>{
-    setPercentages();
-  })
-  </script>
-=======
 //Variable que se encarga de habilitar las barras o los diagramas circulares.
 const diagramType = ref("bars");
 //Función para habilitar el tipo de diagramas
@@ -139,8 +133,10 @@ const setDiagramType = (type) => {
   diagramType.value = type;
   soundKeys();
 };
+onMounted(()=>{
+    setPercentages();
+  })
 </script>
->>>>>>> 2f717a55f95dec5d06063e6de74ef4cb9829f858
 
 <style scoped>
 .n-button {
