@@ -129,23 +129,27 @@ export default {
     },
 
     async makeRequest(objectData){
-          try{
-              const atmData = await fetchData("/atmdetails");
-              console.log("ATM",atmData)
-            const {data}=await fetchData("/accounts/login","post",objectData);
-            localStorage.setItem("token",data.token);
-           localStorage.setItem("cliente", JSON.stringify(data));
-            console.log("token",data);
-            if(this.documento==="1234567890"){
-                this.$router.push("/money")
-            }else{
-              this.$router.push("/cashout")
-            }
-          }catch(err){
+ async makeRequest(objectData){
+    try{
+        const atmData = await fetchData("/atmdetails");
+        console.log("ATM",atmData)
+        const {data}=await fetchData("/accounts/login","post",objectData);
+        localStorage.setItem("token",data.token);
+        localStorage.setItem("cliente", JSON.stringify(data));
+        console.log("token",data);
+        if(this.documento==="1234567890"){
+            this.$router.push("/money")
+        }else{
+            this.$router.push("/cashout")
+        }
+    }catch(err){
+        if (err.response.status === 404) {
+            alert("No se encontró el usuario");
+        } else {
             console.log(err);
-          }
-    },
-  
+        }
+    }
+},
     async go() {
       if (this.contrasena.length < 4 || this.documento.length < 10) {
         alert(
@@ -157,7 +161,6 @@ export default {
           identification: this.documento,
           pin: this.contrasena
         }
-      
         await this.makeRequest(data);
         
       }
@@ -280,6 +283,7 @@ input {
   overflow: hidden;
   font-family: "Poppins", sans-serif !important;
   font-weight: 400;
+  margin-left: 0%;
 }
 .imgs1 {
   margin-left: 76%;
