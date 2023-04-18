@@ -26,9 +26,6 @@ export const useMoneyStore = defineStore('money', {
                 this.percentage50=fifty*100/1000;
                 this.percentage20=twenty*100/1000;
                 this.percentage10=ten*100/1000;
-           
-            //3. Debo hacer una regla de 3 para saber que porcentaje es el que está lleno en cada contenedor.
-            //4. Debo setear mi state con esos porcentajes.
 
             }catch(err){
                 console.log(err);
@@ -49,6 +46,7 @@ export const useMoneyStore = defineStore('money', {
                      billetes de $100.000, sólo cabrían ${this.billsThatFit(this.percentage100)}
                      billetes más en el gabinete.`
                      :'El gabinete para los billetes de $100.000 está completamente lleno.';
+                     this.showModal=false;
                     return Swal.fire({
                             icon: 'error',
                             title: 'Oops...',
@@ -57,8 +55,17 @@ export const useMoneyStore = defineStore('money', {
                     
                 }else{
                     //Aquí iría la petición HTTP.
-                    console.log(amountOfBills);
-                    this.percentage100+=value;
+                    const data={
+                        transactionType: "deposit",
+                        hundred: amountOfBills,
+                        fifty: 0,
+                        twenty: 0,
+                        ten: 0,
+                        atmId: 7,
+                        accountId: 1
+                    }
+                   await fetchData("/transactions",'post',data);
+                   this.percentage100+=value;
                 }
               
             }catch(err){
@@ -74,6 +81,7 @@ export const useMoneyStore = defineStore('money', {
                      billetes de $50.000, sólo cabrían ${this.billsThatFit(this.percentage50)}
                      billetes más en el gabinete.`
                      :'El gabinete para los billetes de $50.000 está completamente lleno.';
+                     this.showModal=false;
                     return Swal.fire({
                             icon: 'error',
                             title: 'Oops...',
@@ -81,7 +89,16 @@ export const useMoneyStore = defineStore('money', {
                     });
                 }else{
                     //Petición HTTP...
-                    console.log(amountOfBills);
+                        const data={
+                        transactionType: "deposit",
+                        hundred:0,
+                        fifty: amountOfBills,
+                        twenty: 0,
+                        ten: 0,
+                        atmId: 7,
+                        accountId: 1
+                    }
+                   await fetchData("/transactions",'post',data);
                     this.percentage50+=value;
                 }
               
@@ -98,6 +115,7 @@ export const useMoneyStore = defineStore('money', {
                      billetes de $20.000, sólo cabrían ${this.billsThatFit(this.percentage20)}
                      billetes más en el gabinete.`
                      :'El gabinete para los billetes de $20.000 está completamente lleno.';
+                    this.showModal=false;
                     return Swal.fire({
                             icon: 'error',
                             title: 'Oops...',
@@ -105,7 +123,16 @@ export const useMoneyStore = defineStore('money', {
                     });
                 }else{
                     //Petición HTTP.
-                    console.log(amountOfBills);
+                    const data={
+                        transactionType: "deposit",
+                        hundred:0,
+                        fifty:0,
+                        twenty: amountOfBills,
+                        ten: 0,
+                        atmId: 7,
+                        accountId: 1
+                    }
+                   await fetchData("/transactions",'post',data);
                     this.percentage20+=value;
                 }
                 
@@ -122,14 +149,25 @@ export const useMoneyStore = defineStore('money', {
                      billetes de $10.000, sólo cabrían ${this.billsThatFit(this.percentage10)}
                      billetes más en el gabinete.`
                      :'El gabinete para los billetes de $10.000 está completamente lleno.';
+                     this.showModal=false;
                     return Swal.fire({
                             icon: 'error',
                             title: 'Oops...',
                             text,
                     });
                 }else{
-                    console.log(amountOfBills);
-                    this.percentage10+=value;
+                      //Petición HTTP.
+                    const data={
+                        transactionType: "deposit",
+                        hundred:0,
+                        fifty:0,
+                        twenty:0,
+                        ten: amountOfBills,
+                        atmId: 7,
+                        accountId: 1
+                    }
+                   await fetchData("/transactions",'post',data);
+                   this.percentage10+=value;
                 }
                 
             }catch(err){
@@ -157,8 +195,5 @@ export const useMoneyStore = defineStore('money', {
             
         }
       
-    },
-    getters: {
-        // doubleCount: (state) => state.count * 2,
-      }
+    }
 })
