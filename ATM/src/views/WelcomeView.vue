@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <div class="container-grid">
     <n-row>
       <!-- <n-row> -->
       <n-col :span="12">
@@ -78,6 +79,7 @@
         <source src="../assets/audio/sound-keys.mp3" type="audio/mpeg" />
       </audio>
     </div>
+  </div>
   </div>
 </template>
 
@@ -169,15 +171,13 @@ export default {
 </script>
 
 <style scoped>
-* {
-  font-family: "Poppins", sans-serif !important;
-  font-weight: 400;
-}
-
 .input-container {
   margin-bottom: 20px;
 }
 
+.container-grid{
+  margin-top: 25%;
+}
 .botones-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -271,12 +271,15 @@ input {
 }
 
 .container {
-  margin: 25% auto;
+  width: 100%;
+  height: 100vh;
   max-width: 1024px;
   max-height: 768px;
   color: #f2f2f2;
   background-color: #131240;
   overflow: hidden;
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 400;
 }
 .imgs1 {
   margin-left: 76%;
