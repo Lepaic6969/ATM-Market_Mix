@@ -1,88 +1,81 @@
 <template>
   <div class="container">
-    <n-row>
-      <!-- <n-row> -->
-      <n-col :span="12">
-        <div class="light-green">
-          <div class="input-container">
-            <n-space vertical>
-              <h2>
-                Bienvenido a VivaBanco
-                <p class="text-center">Número {{ Número }}</p>
-              </h2>
+    <div class="container-grid">
+      <n-row>
+        <!-- <n-row> -->
+        <n-col :span="12">
+          <div class="light-green">
+            <div class="input-container">
+              <n-space vertical>
+                <h2>
+                  Bienvenido a VivaBanco
+                  <p class="text-center">Número {{ Número }}</p>
+                </h2>
 
-              <div class="imgs1">
-                <img
-                  v-if="!contrasena && showImage"
-                  src="https://img.icons8.com/external-xnimrodx-lineal-color-xnimrodx/64/null/external-keyboard-digital-marketing-xnimrodx-lineal-color-xnimrodx.png"
+                <div class="imgs1">
+                  <img
+                    v-if="!contrasena && showImage"
+                    src="https://img.icons8.com/external-xnimrodx-lineal-color-xnimrodx/64/null/external-keyboard-digital-marketing-xnimrodx-lineal-color-xnimrodx.png"
+                  />
+                  <img
+                    class="imgs2"
+                    v-if="contrasena && showImages"
+                    src="https://img.icons8.com/cute-clipart/64/null/lock.png"
+                  />
+                </div>
+                <input
+                  type="number"
+                  placeholder="Documento"
+                  :maxlength="10"
+                  :minlength="6"
+                  v-model="documento"
+                  readonly
                 />
-                <img
-                  class="imgs2"
-                  v-if="contrasena && showImages"
-                  src="https://img.icons8.com/cute-clipart/64/null/lock.png"
+                <input
+                  placeholder="Contraseña"
+                  type="password"
+                  :maxlength="4"
+                  v-model="contrasena"
+                  readonly
                 />
-              </div>
-              <input
-                type="number"
-                placeholder="Documento"
-                :maxlength="10"
-                :minlength="6"
-                v-model="documento"
-                readonly
-              />
-              <input
-                placeholder="Contraseña"
-                type="password"
-                :maxlength="4"
-                v-model="contrasena"
-                readonly
-              />
-            </n-space>
+              </n-space>
+            </div>
           </div>
-        </div>
-      </n-col>
-      <n-col :span="12">
-        <div class="green">
-          <div class="botones-container">
-            <button
-              v-for="numero in numeros"
-              :key="numero"
-              @click="addDigit(numero)"
-            >
-              {{ numero }}
-            </button>
-            <button class="delet" @click="deleteDigit()">
-              Corregir
-              <n-icon>
-                <CloseCircle />
-              </n-icon>
-            </button>
-             <button
-              :key="numero"
-              @click="addDigit(0)"
-            >
-              0
-            </button>
-            <button class="go" @click="go()">
-              Continuar
-              <n-icon>
-                <ChevronForwardCircle />
-              </n-icon>
-            </button>
+        </n-col>
+        <n-col :span="12">
+          <div class="green">
+            <div class="botones-container">
+              <button v-for="numero in numeros" :key="numero" @click="addDigit(numero)">
+                {{ numero }}
+              </button>
+              <button class="delet" @click="deleteDigit()">
+                Corregir
+                <n-icon>
+                  <CloseCircle />
+                </n-icon>
+              </button>
+              <button :key="numero" @click="addDigit(0)">0</button>
+              <button class="go" @click="go()">
+                Continuar
+                <n-icon>
+                  <ChevronForwardCircle />
+                </n-icon>
+              </button>
+            </div>
           </div>
-        </div>
-      </n-col>
-    </n-row>
-    <div>
-      <audio ref="audioPlayer">
-        <source src="../assets/audio/sound-keys.mp3" type="audio/mpeg" />
-      </audio>
+        </n-col>
+      </n-row>
+      <div>
+        <audio ref="audioPlayer">
+          <source src="../assets/audio/sound-keys.mp3" type="audio/mpeg" />
+        </audio>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import fetchData from '../helpers/fetchData.js';
+import fetchData from "../helpers/fetchData.js";
 import { NIcon } from "naive-ui";
 import { ChevronForwardCircle, CloseCircle } from "@vicons/ionicons5";
 export default {
@@ -126,20 +119,27 @@ export default {
       }
     },
 
-    async makeRequest(objectData){
-          try{
-            const {data}=await fetchData("/accounts/login","post",objectData);
-            localStorage.setItem("token",data.token);
-            if(this.documento==="1234567890"){
-                this.$router.push("/money")
-            }else{
-              this.$router.push("/cashout")
-            }
-          }catch(err){
-            console.log(err);
-          }
+    async makeRequest(objectData) {
+      try {
+        const atmData = await fetchData("/atmdetails");
+        console.log("ATM", atmData);
+        const { data } = await fetchData("/accounts/login", "post", objectData);
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data));
+        console.log("token", data);
+        if (this.documento === "1234567890") {
+          this.$router.push("/money");
+        } else {
+          this.$router.push("/cashout");
+        }
+      } catch (err) {
+        if (err.response.status === 404) {
+          alert("No se encontró el usuario");
+        } else {
+          console.log(err);
+        }
+      }
     },
-  
     async go() {
       if (this.contrasena.length < 4 || this.documento.length < 10) {
         alert(
@@ -147,37 +147,29 @@ export default {
         );
       } else {
         // Continúa con la lógica normal
-        const data={
+        const data = {
           identification: this.documento,
-          pin: this.contrasena
-        }
-      
+          pin: this.contrasena,
+        };
         await this.makeRequest(data);
-        
-        
-
-      
-        
       }
     },
   },
-  unmounted(){
-    this.documento =""
-    this.contrasena = ""
-  }
+  unmounted() {
+    this.documento = "";
+    this.contrasena = "";
+  },
 };
 </script>
 
-<style>
-* {
-  font-family: "Poppins", sans-serif !important;
-  font-weight: 400;
-}
-
+<style scoped>
 .input-container {
   margin-bottom: 20px;
 }
 
+.container-grid {
+  margin-top: 25%;
+}
 .botones-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -219,20 +211,17 @@ button:hover {
   border: transparent;
 }
 
-body {
-  background-color: rgb(19, 18, 64);
-}
-
 .light-green {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
+  width: 100%;
   background-color: rgb(19, 18, 64, 0.9);
   border: 1px solid rgb(19, 18, 64, 0.9);
   border-bottom-color: #32d9d9;
   border-left-color: #32d9d9;
-  border-bottom-left-radius: 18px ;
+  border-bottom-left-radius: 18px;
   padding: 5px;
 }
 
@@ -241,11 +230,12 @@ body {
   align-items: center;
   justify-content: center;
   height: 100%;
+  width: 100%;
   background-color: rgb(19, 18, 64, 0.9);
   border: 1px solid rgb(19, 18, 64, 0.9);
   border-top-color: #32d9d9;
   border-right-color: #32d9d9;
-  border-top-right-radius: 18px ;
+  border-top-right-radius: 18px;
   padding: 5px;
 }
 
@@ -262,7 +252,6 @@ input {
   color: #32d9d9;
   border-radius: 4px;
   font-weight: 700;
-  font-size: 80px;
   background-color: rgba(41, 39, 142, 0.8);
   margin-top: 15px;
   margin-bottom: 2px;
@@ -273,7 +262,6 @@ input {
 }
 
 .container {
-  margin: 25% auto;
   width: 100%;
   height: 100vh;
   max-width: 1024px;
@@ -281,6 +269,9 @@ input {
   color: #f2f2f2;
   background-color: #131240;
   overflow: hidden;
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 400;
+  margin-left: 0%;
 }
 .imgs1 {
   margin-left: 76%;

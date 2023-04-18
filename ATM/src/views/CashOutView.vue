@@ -37,6 +37,7 @@ export default {
       isShow: false,
       inactiveTime: 0,
       interval: null,
+      user: null,
     };
   },
 
@@ -73,6 +74,16 @@ export default {
         this.outRoute();
       }
     },
+  },
+
+  created() {
+    const user = localStorage.getItem("user");
+    if (user) {
+      this.user = JSON.parse(user);
+      console.log(this.user);
+    } else {
+      this.$router.push({ name: "welcome" });
+    }
   },
 
   mounted() {
