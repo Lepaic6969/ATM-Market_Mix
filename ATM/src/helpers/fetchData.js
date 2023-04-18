@@ -31,7 +31,7 @@ const fetchData = async (url, method = "get", data = {}) => {
     return data;
   } catch (error) {
     console.log(error);
-    Swal.fire("Error", `${error}`, "error");
+    Swal.fire("Error", `${error.response.data.message}`, "error");
   }
 };
 
