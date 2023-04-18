@@ -2,7 +2,7 @@
   <div class="row d-flex justify-content-center align items-center">
     <h2 class="fw-light pb-3 text-center">Selecciona el valor a retirar</h2>
     <ButtonOut
-      @setValue="$emit('setValue')"
+      @setValue="$emit('setValue', value)"
       v-for="value in values"
       :key="value"
       :value="value"

@@ -35,7 +35,7 @@
         classFaStart="fa-solid fa-delete-left"
       />
       <ButtonOut
-        @showOtherValue="$emit('showOtherValue')"
+        @showOtherValue="$emit('showOtherValue', newValue)"
         class="col-5"
         other="Continuar"
         classFaEnd="fa fa-solid fa-chevron-right"
