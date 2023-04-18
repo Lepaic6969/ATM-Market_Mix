@@ -69,12 +69,17 @@ export default {
       this.isShow = value;
     },
 
+    // withdrawal
     async cashOut(amount) {
       this.soundKeys();
 
       if (amount % 10000 !== 0) {
         Swal.fire("Error", `la cantidad ${amount} deben ser múltiplos de $10.000 `, "error");
         return false;
+      }
+
+      if (amount === 0) {
+        amount = 10000;
       }
 
       const { id: accountId, ...rest } = { ...this.user.account };
@@ -91,7 +96,7 @@ export default {
         accountId,
       };
 
-      console.log(dataToSave);
+      // console.log(dataToSave);
 
       const { data } = await fetchData("/transactions", "post", dataToSave);
 
@@ -102,12 +107,13 @@ export default {
         this.cash = data;
       }, 2800);
 
-      // setTimeout(() => {
-      //   localStorage.removeItem("user");
-      //   localStorage.removeItem("token");
-      //   this.$router.push({ name: "welcome" });
-      // }, 15000);
+      setTimeout(() => {
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        this.$router.push({ name: "welcome" });
+      }, 15000);
     },
+    // end withdrawal
 
     rebootTime() {
       this.inactiveTime = 0;
@@ -142,11 +148,11 @@ export default {
     window.addEventListener("touchmove", this.rebootTime);
     window.addEventListener("keydown", this.rebootTime);
 
-    // if (this.$route.fullPath === "/cashout") {
-    //   this.interval = setInterval(() => {
-    //     this.detecInactive();
-    //   }, 1000);
-    // }
+    if (this.$route.fullPath === "/cashout") {
+      this.interval = setInterval(() => {
+        this.detecInactive();
+      }, 1000);
+    }
   },
 
   beforeMount() {

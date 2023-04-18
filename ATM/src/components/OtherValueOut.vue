@@ -104,6 +104,16 @@ export default {
 
       return formatter.format(this.newValue);
     },
+
+    // newValueReturn() {
+    //   if (this.newValue % 10000 !== 0 || this.newValue === 0 || !this.newValue) {
+    //     Swal.fire("Error", `la cantidad ${this.newValue} deben ser múltiplos de $10.000 `, "error");
+    //     this.deleteString();
+    //     return false;
+    //   } else {
+    //     return this.newValue;
+    //   }
+    // },
   },
 
   watch: {
