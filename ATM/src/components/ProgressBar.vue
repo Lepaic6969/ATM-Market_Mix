@@ -115,12 +115,12 @@
   <script setup>
   import {storeToRefs} from 'pinia';
   import {useMoneyStore} from '../stores/money.js';
-  import {ref} from 'vue';
+  import {ref,onMounted} from 'vue';
   import { MdStats,MdPie } from "@vicons/ionicons4";
 
   const moneyStore=useMoneyStore();
   const {percentage10,percentage20,percentage50,percentage100} =storeToRefs(moneyStore);
-  const {handleOpenCustom}=moneyStore;
+  const {handleOpenCustom,setPercentages}=moneyStore;
 
   //Función para el sonido en los botones...
   const audioPlayer=ref(null);
@@ -136,6 +136,9 @@
     soundKeys();
   }
 
+  onMounted(()=>{
+    setPercentages();
+  })
   </script>
 
 <style scoped>

@@ -1,13 +1,14 @@
 import { defineStore } from 'pinia';
 import Swal from 'sweetalert2';
+import fetchData from '../helpers/fetchData.js';
 
 export const useMoneyStore = defineStore('money', {
     state: () => ({ 
         //Variables para los porcentajes
-        percentage100:70,
+        percentage100:50,
         percentage50:50,
-        percentage20:20,
-        percentage10:10.5,
+        percentage20:50,
+        percentage10:50,
         //Variable para habilitar o desabilitar el modal
         showModal :false,
         //Este es el arreglo que habilita los contenedores para ingresar el dinero.
@@ -19,8 +20,13 @@ export const useMoneyStore = defineStore('money', {
         //Para inicializar los porcentajes con los valores que traiga el Backend.
         async setPercentages(){
             try{
-            //1. Debo establecer la capacidad de los contenedores de billetes.
-            //2. Debo establecer la cantidad de billetes que hay actualmente en cada contenedor.
+                const {hundred,fifty,twenty,ten}=await fetchData('/atmdetails/7');
+                console.log(hundred,fifty,twenty,ten);
+                this.percentage100=hundred*100/1000;
+                this.percentage50=fifty*100/1000;
+                this.percentage20=twenty*100/1000;
+                this.percentage10=ten*100/1000;
+           
             //3. Debo hacer una regla de 3 para saber que porcentaje es el que está lleno en cada contenedor.
             //4. Debo setear mi state con esos porcentajes.
 
