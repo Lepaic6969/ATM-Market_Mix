@@ -124,7 +124,7 @@
       flag=false;
       numberOk.value=false;
     }
-    return flag;s
+    return flag;
   }
   const handleForm100=()=>{
     /************************************************/

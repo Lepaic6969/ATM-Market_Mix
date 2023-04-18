@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import Swal from 'sweetalert2';
 
 export const useMoneyStore = defineStore('money', {
     state: () => ({ 
@@ -28,11 +29,32 @@ export const useMoneyStore = defineStore('money', {
             }
 
         },
+        //Acción para calcular los billetes que se pueden agregar a los gabinetes.
+        billsThatFit(percentage){
+         const amount =(1-(percentage/100))*1000;
+         return Math.trunc(amount);
+        },
         //Acciones para la carga de billetes.
         async increment100(value,amountOfBills){
             try{
-                console.log(amountOfBills);
-                this.percentage100+=value;
+                if(this.percentage100+value>100){
+                    const text=(this.billsThatFit(this.percentage100)>0)?
+                    `No hay espacio para agragar ${amountOfBills}
+                     billetes de $100.000, sólo cabrían ${this.billsThatFit(this.percentage100)}
+                     billetes más en el gabinete.`
+                     :'El gabinete para los billetes de $100.000 está completamente lleno.';
+                    return Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text,
+                    });
+                    
+                }else{
+                    //Aquí iría la petición HTTP.
+                    console.log(amountOfBills);
+                    this.percentage100+=value;
+                }
+              
             }catch(err){
                 console.log(err)
             }
@@ -40,8 +62,23 @@ export const useMoneyStore = defineStore('money', {
         },
         async increment50(value,amountOfBills){
             try{
-                console.log(amountOfBills);
-                this.percentage50+=value;
+                if(this.percentage50+value>100){
+                    const text=(this.billsThatFit(this.percentage50)>0)?
+                    `No hay espacio para agragar ${amountOfBills}
+                     billetes de $50.000, sólo cabrían ${this.billsThatFit(this.percentage50)}
+                     billetes más en el gabinete.`
+                     :'El gabinete para los billetes de $50.000 está completamente lleno.';
+                    return Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text,
+                    });
+                }else{
+                    //Petición HTTP...
+                    console.log(amountOfBills);
+                    this.percentage50+=value;
+                }
+              
             }catch(err){
                 console.log(err)
             }
@@ -49,8 +86,23 @@ export const useMoneyStore = defineStore('money', {
         },
         async increment20(value,amountOfBills){
             try{
-                console.log(amountOfBills);
-                this.percentage20+=value;
+                if(this.percentage20+value>100){
+                    const text=(this.billsThatFit(this.percentage20)>0)?
+                    `No hay espacio para agragar ${amountOfBills}
+                     billetes de $20.000, sólo cabrían ${this.billsThatFit(this.percentage20)}
+                     billetes más en el gabinete.`
+                     :'El gabinete para los billetes de $20.000 está completamente lleno.';
+                    return Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text,
+                    });
+                }else{
+                    //Petición HTTP.
+                    console.log(amountOfBills);
+                    this.percentage20+=value;
+                }
+                
             }catch(err){
                 console.log(err);
             }
@@ -58,8 +110,22 @@ export const useMoneyStore = defineStore('money', {
         },
         async increment10(value,amountOfBills){
             try{
-                console.log(amountOfBills);
-                this.percentage10+=value;
+                if(this.percentage10+value>100){
+                    const text=(this.billsThatFit(this.percentage10)>0)?
+                    `No hay espacio para agragar ${amountOfBills}
+                     billetes de $10.000, sólo cabrían ${this.billsThatFit(this.percentage10)}
+                     billetes más en el gabinete.`
+                     :'El gabinete para los billetes de $10.000 está completamente lleno.';
+                    return Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text,
+                    });
+                }else{
+                    console.log(amountOfBills);
+                    this.percentage10+=value;
+                }
+                
             }catch(err){
                 console.log(err);
             }
