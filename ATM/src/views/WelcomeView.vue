@@ -128,7 +128,6 @@ export default {
       }
     },
 
-    async makeRequest(objectData){
  async makeRequest(objectData){
     try{
         const atmData = await fetchData("/atmdetails");
