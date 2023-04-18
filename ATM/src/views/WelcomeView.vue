@@ -57,7 +57,12 @@
                 <CloseCircle />
               </n-icon>
             </button>
-            <button :key="numero" @click="addDigit(0)">0</button>
+             <button
+              :key="numero"
+              @click="addDigit(0)"
+            >
+              0
+            </button>
             <button class="go" @click="go()">
               Continuar
               <n-icon>
@@ -77,6 +82,7 @@
 </template>
 
 <script>
+import fetchData from '../helpers/fetchData.js';
 import { NIcon } from "naive-ui";
 import { ChevronForwardCircle, CloseCircle } from "@vicons/ionicons5";
 export default {
@@ -119,26 +125,50 @@ export default {
         this.documento = this.documento.slice(0, -1);
       }
     },
-    go() {
+
+    async makeRequest(objectData){
+          try{
+              const atmData = await fetchData("/atmdetails");
+              console.log("ATM",atmData)
+            const {data}=await fetchData("/accounts/login","post",objectData);
+            localStorage.setItem("token",data.token);
+           localStorage.setItem("cliente", JSON.stringify(data));
+            console.log("token",data);
+            if(this.documento==="1234567890"){
+                this.$router.push("/money")
+            }else{
+              this.$router.push("/cashout")
+            }
+          }catch(err){
+            console.log(err);
+          }
+    },
+  
+    async go() {
       if (this.contrasena.length < 4 || this.documento.length < 10) {
-        
-        this.$refs.audioPlayer.play();
         alert(
           "La contraseña debe tener al menos 4 caracteres y el número debe tener al menos 10 dígitos"
         );
       } else {
         // Continúa con la lógica normal
-        this.$refs.audioPlayer.play();
-        this.documento = "";
-        this.contrasena = "";
-        console.log("Continuar");
+        const data={
+          identification: this.documento,
+          pin: this.contrasena
+        }
+      
+        await this.makeRequest(data);
+        
       }
     },
+  },
+  unmounted(){
+    this.documento =""
+    this.contrasena = ""
   },
 };
 </script>
 
-<style>
+<style scoped>
 * {
   font-family: "Poppins", sans-serif !important;
   font-weight: 400;
@@ -189,20 +219,18 @@ button:hover {
   border: transparent;
 }
 
-body {
-  background-color: rgb(19, 18, 64);
-}
 
 .light-green {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
+  width: 100%;
   background-color: rgb(19, 18, 64, 0.9);
   border: 1px solid rgb(19, 18, 64, 0.9);
   border-bottom-color: #32d9d9;
   border-left-color: #32d9d9;
-  border-bottom-left-radius: 18px;
+  border-bottom-left-radius: 18px ;
   padding: 5px;
 }
 
@@ -211,11 +239,12 @@ body {
   align-items: center;
   justify-content: center;
   height: 100%;
+  width: 100%;
   background-color: rgb(19, 18, 64, 0.9);
   border: 1px solid rgb(19, 18, 64, 0.9);
   border-top-color: #32d9d9;
   border-right-color: #32d9d9;
-  border-top-right-radius: 18px;
+  border-top-right-radius: 18px ;
   padding: 5px;
 }
 
@@ -232,7 +261,6 @@ input {
   color: #32d9d9;
   border-radius: 4px;
   font-weight: 700;
-  font-size: 80px;
   background-color: rgba(41, 39, 142, 0.8);
   margin-top: 15px;
   margin-bottom: 2px;
@@ -244,8 +272,6 @@ input {
 
 .container {
   margin: 25% auto;
-  width: 100%;
-  height: 100vh;
   max-width: 1024px;
   max-height: 768px;
   color: #f2f2f2;
