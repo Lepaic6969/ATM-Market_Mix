@@ -87,7 +87,7 @@
         </n-loading-bar-provider>
 
       <audio ref="audioPlayer">
-        <source src="../assets/audio/caja-registradora dinero.mp3" type="audio/mpeg" />
+        <source src="../assets/audio/caja-registradora.mp3" type="audio/mpeg" />
       </audio>
       <audio ref="audioPlayerLogout">
         <source src="../assets/audio/servomotor2.mp3" type="audio/mpeg" />
@@ -202,11 +202,11 @@ const logout=()=>{
  
 }
 
-  watch(showModal, (newShowModal, oldShowModal) => {
-      if(newShowModal){
-        soundKeys();
-      }
-  });
+  // watch(showModal, (newShowModal, oldShowModal) => {
+  //     if(newShowModal){
+  //       soundKeys();
+  //     }
+  // });
     
    
  
