@@ -107,11 +107,12 @@ export default {
         this.cash = data;
       }, 2800);
 
-      setTimeout(() => {
-        localStorage.removeItem("user");
-        localStorage.removeItem("token");
-        this.$router.push({ name: "welcome" });
-      }, 15000);
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+
+      this.interval = setInterval(() => {
+        this.detecInactive();
+      }, 1000);
     },
     // end withdrawal
 
@@ -127,7 +128,7 @@ export default {
     detecInactive() {
       this.inactiveTime++;
       // console.log(this.inactiveTime);
-      if (this.inactiveTime > 15) {
+      if (this.inactiveTime > 20) {
         this.outRoute();
       }
     },

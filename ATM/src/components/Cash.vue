@@ -131,23 +131,23 @@ export default {
 
   methods: {
     srcCash(value) {
-      // console.log(value);
       if (value === 10000) {
-        return (this.srcImg = `/src/assets/img/${value}.png`);
+        // return (this.srcImg = `https://raw.githubusercontent.com/Lepaic6969/ATM-Market_Mix/main/ATM/src/assets/img/${value}.png`);
+        return (this.srcImg = `/img/${value}.png`);
       }
       if (value === 20000) {
-        return (this.srcImg = `/src/assets/img/${value}.png`);
+        return (this.srcImg = `/img/${value}.png`);
       }
       if (value === 50000) {
-        return (this.srcImg = `/src/assets/img/${value}.png`);
+        return (this.srcImg = `/img/${value}.png`);
       }
       if (value === 100000) {
-        return (this.srcImg = `/src/assets/img/${value}.png`);
+        return (this.srcImg = `/img/${value}.png`);
       }
     },
 
     changeModal() {
-      console.log("Impriemiendo");
+      // console.log("Impriemiendo");
       this.showModal = true;
     },
 

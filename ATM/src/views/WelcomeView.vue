@@ -91,7 +91,7 @@ export default {
       numeros: [1, 2, 3, 4, 5, 6, 7, 8, 9],
       showImage: false,
       showImages: false,
-      numb:[]
+      numb: [],
     };
   },
   methods: {
@@ -125,26 +125,26 @@ export default {
         const { data } = await fetchData("/accounts/login", "post", objectData);
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data));
-        console.log("token", data);
+        // console.log("token", data);
         if (this.documento === "1234567890") {
           this.$router.push("/money");
         } else {
           this.$router.push("/cashout");
         }
       } catch (err) {
-          console.log(err);
+        // console.log(err);
       }
     },
-     async atms() {
+    async atms() {
       try {
         const atmD = await fetchData("/atmdetails");
-        this.numb = atmD[0].id
-        console.log(this.numb)
-        console.log(atmD)
+        this.numb = atmD[0].id;
+        // console.log(this.numb)
+        // console.log(atmD)
       } catch (err) {
-          console.log(err);
+        // console.log(err);
       }
-     },
+    },
 
     async go() {
       if (this.contrasena.length < 4 || this.documento.length < 10) {
@@ -160,15 +160,14 @@ export default {
         await this.makeRequest(data);
       }
     },
-    
   },
   unmounted() {
     this.documento = "";
     this.contrasena = "";
   },
-  created(){
-    this.atms()
-  }
+  created() {
+    this.atms();
+  },
 };
 </script>
 
