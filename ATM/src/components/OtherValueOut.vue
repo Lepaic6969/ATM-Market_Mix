@@ -20,7 +20,7 @@
     </div>
     <!-- text-info -->
     <div class="text-info my-5">
-      <h3 class="text-center my-3">Si es correcto pulsa <b>Enter</b> o <b>Continuar</b></h3>
+      <h3 class="text-center my-3">Si es correcto pulsa <b>Continuar</b></h3>
       <h3 class="text-center my-3">Si no es correcto pulsa <b>Retroceso</b> o <b>Borrar</b></h3>
       <h6 class="text-center my-3 text-info-light">
         <b>Retroceso</b> Elimina el ultimo digito / <b>Borrar</b> Limpia todo el valor

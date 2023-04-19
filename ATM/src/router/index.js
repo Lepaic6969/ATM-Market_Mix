@@ -1,8 +1,8 @@
 import { createMemoryHistory, createRouter, createWebHistory } from "vue-router";
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  // history: createMemoryHistory(),
+  // history: createWebHistory(import.meta.env.BASE_URL),
+  history: createMemoryHistory(),
   routes: [
     {
       path: "/",
@@ -18,6 +18,10 @@ const router = createRouter({
       path: "/money",
       name: "money",
       component: () => import("../views/MoneyView.vue"),
+    },
+    {
+      path: "/:pathMatch(.*)*",
+      redirect: { name: "welcome" },
     },
   ],
 });
