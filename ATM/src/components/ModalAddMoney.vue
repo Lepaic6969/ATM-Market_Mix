@@ -141,25 +141,12 @@
   </div>
 </template>
 
-<<<<<<< HEAD
-      <audio ref="audioPlayer">
-        <source src="../assets/audio/caja-registradora.mp3" type="audio/mpeg" />
-      </audio>
-      <audio ref="audioPlayerLogout">
-        <source src="../assets/audio/servomotor2.mp3" type="audio/mpeg" />
-      </audio>
-    </div>
-    
-  </template>
-  
-=======
 <script setup>
 import { MdCash, MdClose, IosLogOut } from "@vicons/ionicons4";
 import { useMoneyStore } from "../stores/money.js";
 import { storeToRefs } from "pinia";
 import { ref, watch } from "vue";
 import { useRouter } from "vue-router";
->>>>>>> 567e57d85fb7caed368af6b774dc14def4192186
 
 const moneyStore = useMoneyStore();
 const { showModal, container } = storeToRefs(moneyStore);
@@ -255,28 +242,13 @@ const logout = () => {
   }, 1000);
 };
 
-watch(showModal, (newShowModal, oldShowModal) => {
-  if (newShowModal) {
-    soundKeys();
-  }
-});
+// watch(showModal, (newShowModal, oldShowModal) => {
+//   if (newShowModal) {
+//     soundKeys();
+//   }
+// });
 </script>
 
-<style scoped>
-.n-button {
-  font-size: 20px;
-}
-
-<<<<<<< HEAD
-  // watch(showModal, (newShowModal, oldShowModal) => {
-  //     if(newShowModal){
-  //       soundKeys();
-  //     }
-  // });
-    
-   
- 
-  </script>
 
   <style scoped >
   .n-button{
@@ -286,11 +258,6 @@ watch(showModal, (newShowModal, oldShowModal) => {
   .n-button:active,
   .n-button:focus,
   .n-button:hover {
-=======
-.n-button:active,
-.n-button:focus,
-.n-button:hover {
->>>>>>> 567e57d85fb7caed368af6b774dc14def4192186
   border-color: #131240 !important;
   box-shadow: 0 0 3px 1px #131240 !important;
   color: #131240;
