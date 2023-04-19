@@ -9,10 +9,18 @@
                 <n-button icon-placement="left" @click="handleOpen">
                     <template #icon>
                     <n-icon>
-                        <MdCash/>
+                        <MdCash />
                     </n-icon>
                     </template>
                     Agregar Efectivo
+                </n-button>
+                <n-button icon-placement="left" @click="logout">
+                    <template #icon>
+                      <n-icon>
+                        <IosLogOut />
+                      </n-icon>
+                    </template>
+                    Cerrar Gabinetes
                 </n-button>
                 </n-space>
           
@@ -81,17 +89,20 @@
       <audio ref="audioPlayer">
         <source src="../assets/audio/caja-registradora dinero.mp3" type="audio/mpeg" />
       </audio>
-        
+      <audio ref="audioPlayerLogout">
+        <source src="../assets/audio/servomotor2.mp3" type="audio/mpeg" />
+      </audio>
     </div>
     
   </template>
   
 
   <script setup>
-  import {MdCash,MdClose} from '@vicons/ionicons4';
+  import {MdCash,MdClose,IosLogOut} from '@vicons/ionicons4';
   import {useMoneyStore} from '../stores/money.js';
   import { storeToRefs } from "pinia";
   import {ref,watch} from 'vue';
+  import {useRouter} from 'vue-router';
 
   const moneyStore=useMoneyStore();
   const {showModal,container}=storeToRefs(moneyStore);
@@ -100,8 +111,12 @@
   //**********Programación para procesar los formularios******************
   //Sonido que se debe activar al abrir el modal del formulario.
   const audioPlayer=ref(null);
+  const audioPlayerLogout=ref(null);
   const soundKeys=()=>{
      audioPlayer.value.play();
+  }
+  const soundKeysLogout=()=>{
+    audioPlayerLogout.value.play();
   }
   //Variables reactivas de los formularios.
   const oneHundred=ref('');
@@ -176,6 +191,16 @@
       handleClose();
     }
   }
+
+const router=useRouter();
+const logout=()=>{
+ soundKeysLogout();
+ setTimeout(() => {
+  router.push("/");
+ }, 1000);
+ 
+ 
+}
 
   watch(showModal, (newShowModal, oldShowModal) => {
       if(newShowModal){

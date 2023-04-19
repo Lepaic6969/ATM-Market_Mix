@@ -12,7 +12,7 @@
           Diagrama Circular
         </n-button>
 
-        <n-button icon-placement="left" @click="setDiagramType('bars')">
+        <n-button icon-placement="left" @click="setDiagramType('bars')" >
           <template #icon>
             <n-icon>
               <MdStats />
@@ -20,6 +20,7 @@
           </template>
           Diagrama de Barras
         </n-button>
+        
       </n-space>
     </div>
     <!-- Diagramas Circulares -->
@@ -133,6 +134,8 @@ const setDiagramType = (type) => {
   diagramType.value = type;
   soundKeys();
 };
+
+
 onMounted(()=>{
     setPercentages();
   })
